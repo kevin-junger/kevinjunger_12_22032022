@@ -1,29 +1,51 @@
-import { Fragment, useState, useEffect } from "react"
-import Axios from "axios"
+import { Fragment } from "react"
+import Header from "./components/header/header"
+import Sidebar from "./components/sidebar/sidebar"
+import Api from "./Api"
 
 export default function App() {
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    Axios.get("http://localhost:3000/user/12")
-    .then(response => {
-      setData(response.data.data)
-      setError(null)
-    })
-    .catch(error => {
-      setError(error.message)
-      setData(null)
-    })
-    .finally(setLoading(false))
-  }, [])
+  const api = new Api()
 
   return (
     <Fragment>
-      {loading && <p>Veuillez patienter...</p>}
-      {error && console.log(error)}
-      {data && console.log(data) }
+      <Header />
+      <main className="main">
+        <Sidebar />
+        <section className="wrapper">
+          <h1>Bonjour Thomas</h1>
+          <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+          <div className="dashboard">
+            <div className="stats">
+              <div>
+                <h2>Activité quotidienne</h2>
+              </div>
+              <div>
+                <h2>Durée moyenne des sessions</h2>
+              </div>
+              <div>
+                <h2>Radar Chart</h2>
+              </div>
+              <div>
+                <h2>Score</h2>
+              </div>
+            </div>
+            <div className="nutrition">
+              <div className="card">
+                <h3>Calories</h3>
+              </div>
+              <div className="card">
+                <h3>Protéines</h3>
+              </div>
+              <div className="card">
+                <h3>Glucides</h3>
+              </div>
+              <div className="card">
+                <h3>Lipides</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </Fragment>
   )
 }
