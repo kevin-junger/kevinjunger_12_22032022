@@ -1,0 +1,26 @@
+.sidebar {
+  height: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.sidebar__menu {
+  margin: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+.sidebar__menu li {
+  margin-bottom: 1rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.sidebar__copyright {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  color: white;
+  writing-mode: vertical-lr;
+  text-orientation: sideways-right;
+}
