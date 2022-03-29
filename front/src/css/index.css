@@ -13,6 +13,8 @@
 }
 .stats {
   width: 70%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .nutrition {
   flex-grow: 1;
