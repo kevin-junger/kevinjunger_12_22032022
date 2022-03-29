@@ -1,7 +1,7 @@
 import "./header.css"
 import logo from "./logo.png"
 
-export default function Header() {
+export default function HeaderUI() {
   return(
     <header className="header">
       <nav className="navbar">

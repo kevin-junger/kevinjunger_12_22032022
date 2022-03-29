@@ -1,19 +1,18 @@
-import { Fragment } from "react"
-import Header from "./components/header/header"
-import Sidebar from "./components/sidebar/sidebar"
-import Dashboard from "./components/dashboard/dashboard"
+import HeaderUI from "./components/header/headerUI"
+import SidebarUI from "./components/sidebar/sidebarUI"
+import DashboardUI from "./components/dashboard/dashboardUI"
 import Api from "./Api"
 
 export default function App() {
   const api = new Api()
 
   return (
-    <Fragment>
-      <Header />
+    <>
+      <HeaderUI />
       <main className="main">
-        <Sidebar />
-        <Dashboard api={api} />
+        <SidebarUI />
+        <DashboardUI api={api} />
       </main>
-    </Fragment>
+    </>
   )
 }

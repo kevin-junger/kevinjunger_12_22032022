@@ -1,4 +1,9 @@
-export default function Dashboard(props) {
+import DailyChart from "./stats/dailyChart"
+import GoalChart from "./stats/goalChart"
+import PerformanceChart from "./stats/performanceChart"
+import SessionsChart from "./stats/sessionsChart"
+
+export default function DashboardUI(props) {
   const api = props.api
   
   return(
@@ -7,18 +12,10 @@ export default function Dashboard(props) {
       <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       <div className="dashboard">
         <div className="stats">
-          <div>
-            <h2>Activité quotidienne</h2>
-          </div>
-          <div>
-            <h2>Durée moyenne des sessions</h2>
-          </div>
-          <div>
-            <h2>Radar Chart</h2>
-          </div>
-          <div>
-            <h2>Score</h2>
-          </div>
+          <DailyChart api={api} />
+          <SessionsChart api={api} />
+          <PerformanceChart api={api} />
+          <GoalChart api={api} />
         </div>
         <div className="nutrition">
           <div className="card">

@@ -4,7 +4,7 @@ import WeightIcon from "./icons/weight"
 import YogaIcon from "./icons/yoga"
 import "./sidebar.css"
 
-export default function Sidebar() {
+export default function SidebarUI() {
   return(
     <aside className="sidebar">
       <ul className="sidebar__menu">
