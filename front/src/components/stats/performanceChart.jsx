@@ -57,7 +57,7 @@ export default class PerformanceChart extends Component {
   }
 
   fetch() {
-    this.props.api.getUserPerformance(12)
+    this.props.api.getUserPerformance()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 * {
   font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
 .main {
   display: flex;
@@ -25,4 +26,10 @@
   width: 100%;
   background-color: #fbfbfb;
   border-radius: 5px;
+}
+.daily {
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  padding: 1rem;
+  flex-basis: 100%;
 }

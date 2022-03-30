@@ -1,5 +1,5 @@
-import "./header.css"
-import logo from "./logo.png"
+import "../css/header.css"
+import logo from "../assets/logo.png"
 
 export default function HeaderUI() {
   return(

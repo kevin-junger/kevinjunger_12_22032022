@@ -1,10 +1,10 @@
-import BicycleIcon from "./icons/bicycle"
-import SwimIcon from "./icons/swim"
-import WeightIcon from "./icons/weight"
-import YogaIcon from "./icons/yoga"
-import "./sidebar.css"
+import BicycleIcon from "../assets/icons/bicycle"
+import SwimIcon from "../assets/icons/swim"
+import WeightIcon from "../assets/icons/weight"
+import YogaIcon from "../assets/icons/yoga"
+import "../css/sidebar.css"
 
-export default function SidebarUI() {
+export default function Sidebar() {
   return(
     <aside className="sidebar">
       <ul className="sidebar__menu">

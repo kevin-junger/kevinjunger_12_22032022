@@ -4,10 +4,10 @@ import Axios from "axios"
  * @class Api
  * @classdesc Manages HTTP GET calls in order to fetch the necessary data
  */
-
 export default class Api {
-  constructor() {
+  constructor(userId) {
     this.baseUrl = "http://localhost:3000"
+    this.userId = userId
   }
 
   /**
@@ -30,8 +30,8 @@ export default class Api {
    * @param { Integer } userId 
    * @returns Promise
    */
-  getUser(userId) {
-    return this.init().get(`/user/${userId}`)
+  getUser() {
+    return this.init().get(`/user/${this.userId}`)
   }
 
   /**
@@ -39,8 +39,8 @@ export default class Api {
    * @param { Integer } userId 
    * @returns Promise
    */
-  getUserActivity(userId) {
-    return this.init().get(`/user/${userId}/activity`)
+  getUserActivity() {
+    return this.init().get(`/user/${this.userId}/activity`)
   }
 
   /**
@@ -48,8 +48,8 @@ export default class Api {
    * @param { Integer } userId 
    * @returns Promise
    */
-  getUserAverageSessions(userId) {
-    return this.init().get(`/user/${userId}/average-sessions`)
+  getUserAverageSessions() {
+    return this.init().get(`/user/${this.userId}/average-sessions`)
   }
 
   /**
@@ -57,7 +57,7 @@ export default class Api {
    * @param { Integer } userId 
    * @returns Promise
    */
-   getUserPerformance(userId) {
-    return this.init().get(`/user/${userId}/performance`)
+  getUserPerformance() {
+    return this.init().get(`/user/${this.userId}/performance`)
   }
 }

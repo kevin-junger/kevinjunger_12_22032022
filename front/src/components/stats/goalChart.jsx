@@ -63,7 +63,7 @@ export default class GoalChart extends Component {
   }
 
   fetch() {
-    this.props.api.getUser(12)
+    this.props.api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)

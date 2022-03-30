@@ -65,7 +65,7 @@ export default class DailyChart extends Component {
   }
 
   fetch() {
-    this.props.api.getUserActivity(12)
+    this.props.api.getUserActivity()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
@@ -84,27 +84,24 @@ export default class DailyChart extends Component {
 
   render() {
     return(
-      <div>
+      <div className="daily">
         { this.state.data &&
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="pv" fill="#8884d8" />
-            <Bar dataKey="uv" fill="#82ca9d" />
-          </BarChart>
+          <>
+            <h2>Activité quotidienne</h2>
+            <BarChart
+              width={500}
+              height={300}
+              data={data}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="pv" fill="#8884d8" />
+              <Bar dataKey="uv" fill="#82ca9d" />
+            </BarChart>
+          </>
         }
       </div>
     )

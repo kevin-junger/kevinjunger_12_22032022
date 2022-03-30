@@ -2,9 +2,10 @@ import DailyChart from "./stats/dailyChart"
 import GoalChart from "./stats/goalChart"
 import PerformanceChart from "./stats/performanceChart"
 import SessionsChart from "./stats/sessionsChart"
+import Api from "../Api"
 
-export default function DashboardUI(props) {
-  const api = props.api
+export default function DashboardUI() {
+  const api = new Api(12)
   
   return(
     <section className="wrapper">
