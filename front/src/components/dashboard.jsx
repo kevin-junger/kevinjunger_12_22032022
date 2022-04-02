@@ -9,8 +9,10 @@ export default function DashboardUI() {
   
   return(
     <section className="wrapper">
-      <h1>Bonjour Thomas</h1>
-      <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+      <div className="greetings">
+        <h1>Bonjour <em>Thomas</em></h1>
+        <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+      </div>
       <div className="dashboard">
         <div className="stats">
           <DailyChart api={api} />

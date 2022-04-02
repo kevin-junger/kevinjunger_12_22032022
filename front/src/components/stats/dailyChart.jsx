@@ -1,58 +1,13 @@
 import { Component } from "react"
 import {
+  ResponsiveContainer,
   BarChart,
-  Bar,
+  CartesianGrid,
   XAxis,
   YAxis,
-  CartesianGrid,
+  Bar,
   Tooltip,
-  Legend
 } from "recharts"
-
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
-  }
-]
 
 export default class DailyChart extends Component {
   constructor(props) {
@@ -80,27 +35,66 @@ export default class DailyChart extends Component {
     })
   }
 
-  // console.log(this.state.data.sessions)
-
   render() {
     return(
       <div className="daily">
         { this.state.data &&
           <>
-            <h2>Activité quotidienne</h2>
-            <BarChart
-              width={500}
-              height={300}
-              data={data}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="pv" fill="#8884d8" />
-              <Bar dataKey="uv" fill="#82ca9d" />
-            </BarChart>
+            <div className="daily__header">
+              <h2>Activité quotidienne</h2>
+              <div>
+                <p>
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#282D30"/>
+                  </svg>
+                  Poids (kg)
+                </p>
+                <p>
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#E60000"/>
+                  </svg>
+                  Calories brûlées (kCal)
+                </p>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height="75%">
+              <BarChart
+                data={this.state.data.sessions}
+                margin={{ top: 16, right: 24, bottom: 48, left: 24 }}
+                barGap={8}
+                barCategoryGap="35%"
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
+                />
+                <XAxis 
+                  dataKey="day"
+                  dy={16}
+                  tickLine={false}
+                  tick={{ fontSize: 14, fontWeight: 500 }}
+                />
+                <YAxis
+                  dataKey="calories"
+                  hide={true}
+                />
+                <Bar
+                  dataKey="kilogram"
+                  fill="#000000"
+                  radius={[50, 50, 0, 0]}
+                />
+                <Bar
+                  dataKey="calories"
+                  fill="#ff0000"
+                  radius={[50, 50, 0, 0]}
+                />
+                <Tooltip
+                  cursor={{
+                    fill: "rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </BarChart>
+            </ResponsiveContainer>
           </>
         }
       </div>
