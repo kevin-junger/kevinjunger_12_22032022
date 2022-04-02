@@ -57,10 +57,10 @@ export default class DailyChart extends Component {
                 </p>
               </div>
             </div>
-            <ResponsiveContainer width="100%" height="75%">
+            <ResponsiveContainer width="100%" height="65%">
               <BarChart
                 data={this.state.data.sessions}
-                margin={{ top: 16, right: 24, bottom: 48, left: 24 }}
+                margin={{ top: 16, right: 24, bottom: 16, left: 24 }}
                 barGap={8}
                 barCategoryGap="35%"
               >
