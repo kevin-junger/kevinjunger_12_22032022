@@ -1,6 +1,6 @@
-import Header from "./components/header"
-import Sidebar from "./components/sidebar"
-import Dashboard from "./components/dashboard"
+import HeaderUI from "./components/header"
+import SidebarUI from "./components/sidebar"
+import DashboardUI from "./components/dashboard"
 import styled from "styled-components"
 
 const Main = styled.main`
@@ -10,10 +10,10 @@ const Main = styled.main`
 export default function App() {
   return (
     <>
-      <Header />
+      <HeaderUI />
       <Main>
-        <Sidebar />
-        <Dashboard />
+        <SidebarUI />
+        <DashboardUI />
       </Main>
     </>
   )
