@@ -2,39 +2,3 @@
 * {
   font-family: 'Roboto', sans-serif;
 }
-.nutrition__card {
-  display: flex;
-  align-items: center;
-  background-color: #fbfbfb;
-  border-radius: 5px;
-}
-.nutrition__card h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
-.nutrition__card em {
-  font-style: normal;
-  font-size: 14px;
-  font-weight: 500;
-  color: #74798C;
-}
-.nutrition__icon {
-  margin-left: 10%;
-  margin-right: 1.5rem;
-  padding: 1.5rem;
-  border-radius: 5px;
-}
-.nutrition__icon--calories {
-  background-color: rgba(255, 0, 0, 0.1);
-}
-.nutrition__icon--proteins {
-  background-color: rgba(74, 184, 255, 0.1);
-}
-.nutrition__icon--glucids {
-  background-color: rgba(249, 206, 35, 0.1);
-}
-.nutrition__icon--fats {
-  background-color: rgba(253, 81, 129, 0.1);
-}
