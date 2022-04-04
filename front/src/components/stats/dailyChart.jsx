@@ -1,0 +1,103 @@
+import { Component } from "react"
+import {
+  ResponsiveContainer,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Bar,
+  Tooltip,
+} from "recharts"
+
+export default class DailyChart extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { data: null }
+  }
+
+  componentDidMount() {
+    this.fetch()
+  }
+
+  fetch() {
+    this.props.api.getUserActivity()
+    .then(response => {
+      if(response.statusText !== "OK") {
+        throw new Error(response.statusText)
+      }
+      return response.data.data
+    })
+    .then(data => {
+      this.setState({ data: data })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  render() {
+    return(
+      <div className="daily">
+        { this.state.data &&
+          <>
+            <div className="daily__header">
+              <h2>Activité quotidienne</h2>
+              <div>
+                <p>
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#282D30"/>
+                  </svg>
+                  Poids (kg)
+                </p>
+                <p>
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#E60000"/>
+                  </svg>
+                  Calories brûlées (kCal)
+                </p>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={this.state.data.sessions}
+                margin={{ top: 80, right: 24, bottom: 32, left: 24 }}
+                barGap={8}
+                barCategoryGap="40%"
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
+                />
+                <XAxis 
+                  dataKey="day"
+                  dy={16}
+                  tickLine={false}
+                  tick={{ fontSize: 14, fontWeight: 500 }}
+                />
+                <YAxis
+                  dataKey="calories"
+                  hide={true}
+                />
+                <Bar
+                  dataKey="kilogram"
+                  fill="#000000"
+                  radius={[50, 50, 0, 0]}
+                />
+                <Bar
+                  dataKey="calories"
+                  fill="#ff0000"
+                  radius={[50, 50, 0, 0]}
+                />
+                <Tooltip
+                  cursor={{
+                    fill: "rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </>
+        }
+      </div>
+    )
+  }
+}
