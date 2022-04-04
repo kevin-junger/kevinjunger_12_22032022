@@ -42,9 +42,9 @@ export default class GoalChart extends Component {
         { this.state.data &&
           <>
             <h2>Score</h2>
-            <ResponsiveContainer width="100%" height="80%">
+            <ResponsiveContainer width="100%" height="85%">
               <RadialBarChart
-                innerRadius={"95%"}
+                innerRadius={"90%"}
                 barSize={10}
                 data={this.state.data}
                 startAngle={225}
@@ -69,7 +69,7 @@ export default class GoalChart extends Component {
                   textAnchor="middle"
                   dominantBaseline="middle"
                 >
-                  couille
+                  {this.state.data[0].value} %
                 </text>
               </RadialBarChart>
             </ResponsiveContainer>

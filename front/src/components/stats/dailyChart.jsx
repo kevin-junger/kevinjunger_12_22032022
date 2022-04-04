@@ -57,12 +57,12 @@ export default class DailyChart extends Component {
                 </p>
               </div>
             </div>
-            <ResponsiveContainer width="100%" height="65%">
+            <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={this.state.data.sessions}
-                margin={{ top: 16, right: 24, bottom: 16, left: 24 }}
+                margin={{ top: 80, right: 24, bottom: 32, left: 24 }}
                 barGap={8}
-                barCategoryGap="35%"
+                barCategoryGap="40%"
               >
                 <CartesianGrid
                   strokeDasharray="3 3"

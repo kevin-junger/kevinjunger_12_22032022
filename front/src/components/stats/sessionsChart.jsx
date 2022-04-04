@@ -39,10 +39,10 @@ export default class SessionsChart extends Component {
         { this.state.data &&
           <>
             <h2>Durée moyenne des sessions</h2>
-            <ResponsiveContainer width="100%" height="60%">
+            <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={this.state.data.sessions}
-                margin={{ top: 0, right: 24, bottom: 16, left: 24 }}
+                margin={{ top: 68, right: 24, bottom: 24, left: 24 }}
               >
                 <XAxis
                   dataKey="day"

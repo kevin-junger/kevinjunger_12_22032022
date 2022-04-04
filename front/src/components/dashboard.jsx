@@ -3,6 +3,7 @@ import GoalChart from "./stats/goalChart"
 import PerformanceChart from "./stats/performanceChart"
 import SessionsChart from "./stats/sessionsChart"
 import Api from "../Api"
+import NutritionChart from "./stats/nutritionChart"
 
 export default function DashboardUI() {
   const api = new Api(12)
@@ -21,18 +22,7 @@ export default function DashboardUI() {
           <GoalChart api={api} />
         </div>
         <div className="nutrition">
-          <div className="card">
-            <h3>Calories</h3>
-          </div>
-          <div className="card">
-            <h3>Protéines</h3>
-          </div>
-          <div className="card">
-            <h3>Glucides</h3>
-          </div>
-          <div className="card">
-            <h3>Lipides</h3>
-          </div>
+          <NutritionChart api={api} />
         </div>
       </div>
     </section>
