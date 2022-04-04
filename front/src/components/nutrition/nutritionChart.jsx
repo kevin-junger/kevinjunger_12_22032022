@@ -1,9 +1,9 @@
 import { Component } from "react"
 import NutritionCard from "./nutritionCard"
-import CaloriesIcon from "../../assets/icons/calories"
-import FatsIcon from "../../assets/icons/fats"
-import GlucidsIcon from "../../assets/icons/glucids"
-import ProteinsIcon from "../../assets/icons/proteins"
+import CaloriesIcon from "./icons/calories"
+import FatsIcon from "./icons/fats"
+import GlucidsIcon from "./icons/glucids"
+import ProteinsIcon from "./icons/proteins"
 
 export default class NutritionChart extends Component {
   constructor(props) {
