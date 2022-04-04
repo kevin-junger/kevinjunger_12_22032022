@@ -1,11 +1,12 @@
-import Greetings from "./grettings"
-import DailyChart from "./stats/dailyChart"
-import GoalChart from "./stats/goalChart"
-import PerformanceChart from "./stats/performanceChart"
-import SessionsChart from "./stats/sessionsChart"
-import NutritionChart from "./nutrition/nutritionChart"
+import Greetings from "../components/grettings"
+import DailyChart from "../components/stats/dailyChart"
+import GoalChart from "../components/stats/goalChart"
+import PerformanceChart from "../components/stats/performanceChart"
+import SessionsChart from "../components/stats/sessionsChart"
+import NutritionChart from "../components/nutrition/nutritionChart"
 import Api from "../Api"
 import styled from "styled-components"
+import { useParams } from "react-router-dom"
 
 const Wrapper = styled.section`
   width: calc(100vw - 150px);
@@ -35,7 +36,8 @@ const Nutrition = styled.div`
 `
 
 export default function DashboardUI() {
-  const api = new Api(12)
+  let params = useParams()
+  const api = new Api(params.userId)
   
   return(
     <Wrapper>
