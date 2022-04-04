@@ -1,15 +1,11 @@
-import Header from "./components/header"
-import Sidebar from "./components/sidebar"
-import Dashboard from "./components/dashboard"
+import { Outlet } from "react-router-dom"
+import HeaderUI from "./components/header"
 
 export default function App() {
-  return (
+  return(
     <>
-      <Header />
-      <main className="main">
-        <Sidebar />
-        <Dashboard />
-      </main>
+      <HeaderUI />
+      <Outlet />
     </>
   )
 }

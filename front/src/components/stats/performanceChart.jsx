@@ -7,6 +7,17 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
+import styled from "styled-components"
+
+const Stat = styled.div`
+  grid-area: 2 / 2 / 3 / 3;
+  background-color: #282D30;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export default class PerformanceChart extends Component {
   constructor(props) {
     super(props)
@@ -35,9 +46,9 @@ export default class PerformanceChart extends Component {
 
   render() {
     return(
-      <div className="performance">
+      <Stat>
         { this.state.data &&
-          <ResponsiveContainer width="100%" height="80%">
+          <ResponsiveContainer width="90%" height="100%">
             <RadarChart
               outerRadius={"90%"}
               data={this.state.data.data}
@@ -61,7 +72,7 @@ export default class PerformanceChart extends Component {
             </RadarChart>
           </ResponsiveContainer>
         }
-      </div>
+      </Stat>
     )
   }
 }
