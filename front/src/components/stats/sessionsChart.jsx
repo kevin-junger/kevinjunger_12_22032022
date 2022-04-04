@@ -6,6 +6,25 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts"
+import styled from "styled-components"
+
+const Stat = styled.div`
+  position: relative;
+  grid-area: 2 / 1 / 3 / 2;
+  background-color: red;
+  border-radius: 5px;
+`
+
+const Title = styled.h2`
+  left: 1.5rem;
+  top: 0.5rem;
+  width: calc(100% - 3rem);
+  position: absolute;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  opacity: 50%;
+`
 
 export default class SessionsChart extends Component {
   constructor(props) {
@@ -35,10 +54,10 @@ export default class SessionsChart extends Component {
 
   render() {
     return(
-      <div className="sessions">
+      <Stat>
         { this.state.data &&
           <>
-            <h2>Durée moyenne des sessions</h2>
+            <Title>Durée moyenne des sessions</Title>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={this.state.data.sessions}
@@ -72,7 +91,7 @@ export default class SessionsChart extends Component {
             </ResponsiveContainer>
           </>
         }
-      </div>
+      </Stat>
     )
   }
 }

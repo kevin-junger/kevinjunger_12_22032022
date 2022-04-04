@@ -5,6 +5,24 @@ import {
   ResponsiveContainer,
   PolarAngleAxis
 } from "recharts"
+import styled from "styled-components"
+
+const Stat = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  grid-area: 2 / 3 / 3 / 4;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+`
+
+const Title = styled.h2`
+  left: 1.5rem;
+  top: 0.5rem;
+  position: absolute;
+  font-size: 15px;
+  font-weight: 500;
+`
 
 export default class GoalChart extends Component {
   constructor(props) {
@@ -38,10 +56,10 @@ export default class GoalChart extends Component {
 
   render() {
     return(
-      <div className="goal">
+      <Stat>
         { this.state.data &&
           <>
-            <h2>Score</h2>
+            <Title>Score</Title>
             <ResponsiveContainer width="100%" height="85%">
               <RadialBarChart
                 innerRadius={"90%"}
@@ -75,7 +93,7 @@ export default class GoalChart extends Component {
             </ResponsiveContainer>
           </>
         }
-      </div>
+      </Stat>
     )
   }
 }

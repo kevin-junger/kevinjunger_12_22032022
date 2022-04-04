@@ -8,6 +8,46 @@ import {
   Bar,
   Tooltip,
 } from "recharts"
+import styled from "styled-components"
+
+const Stat = styled.div`
+  position: relative;
+  grid-area: 1 / 1 / 2 / 4;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+`
+
+const Header = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 1rem;
+  left: 1.5rem;
+  width: calc(100% - 3rem);
+`
+
+const Title = styled.h2`
+  font-size: 15px;
+  font-weight: 500;
+`
+
+const Legend = styled.div`
+  display: flex;
+  align-items: center;
+  width: 280px;
+  justify-content: space-between;
+`
+
+const LegendColor = styled.div`
+  margin-right: 0.2rem;
+`
+
+const LegendTitle = styled.p`
+  color: #74798c;
+  font-size: 14px;
+  font-weight: 500;
+`
 
 export default class DailyChart extends Component {
   constructor(props) {
@@ -37,26 +77,26 @@ export default class DailyChart extends Component {
 
   render() {
     return(
-      <div className="daily">
+      <Stat>
         { this.state.data &&
           <>
-            <div className="daily__header">
-              <h2>Activité quotidienne</h2>
-              <div>
-                <p>
+            <Header>
+              <Title>Activité quotidienne</Title>
+              <Legend>
+                <LegendColor>
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#282D30"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#282D30"/>
                   </svg>
-                  Poids (kg)
-                </p>
-                <p>
+                </LegendColor>
+                <LegendTitle>Poids (kg)</LegendTitle>
+                <LegendColor>
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#E60000"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z" fill="#E60000"/>
                   </svg>
-                  Calories brûlées (kCal)
-                </p>
-              </div>
-            </div>
+                </LegendColor>
+                <LegendTitle>Calories brûlées (kCal)</LegendTitle>
+              </Legend>
+            </Header>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={this.state.data.sessions}
@@ -97,7 +137,7 @@ export default class DailyChart extends Component {
             </ResponsiveContainer>
           </>
         }
-      </div>
+      </Stat>
     )
   }
 }
