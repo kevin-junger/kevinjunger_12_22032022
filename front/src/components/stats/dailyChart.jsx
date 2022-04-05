@@ -49,6 +49,40 @@ const LegendTitle = styled.p`
   font-weight: 500;
 `
 
+const TooltipBox = styled.div`
+  background-color: red;
+  padding: 0.5rem;
+  border-radius: 5px;
+`
+
+const TooltipList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+const TooltipItem = styled.li`
+  color: white;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+`
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active) {
+    return(
+      <TooltipBox>
+        <TooltipList>
+          <TooltipItem>{payload[0].value} kg</TooltipItem>
+          <TooltipItem>{payload[1].value} kCal</TooltipItem>
+        </TooltipList>
+      </TooltipBox>
+    )
+  }
+
+  return null;
+}
+
 export default class DailyChart extends Component {
   constructor(props) {
     super(props)
@@ -132,6 +166,7 @@ export default class DailyChart extends Component {
                   cursor={{
                     fill: "rgba(0, 0, 0, 0.1)",
                   }}
+                  content={<CustomTooltip />}
                 />
               </BarChart>
             </ResponsiveContainer>

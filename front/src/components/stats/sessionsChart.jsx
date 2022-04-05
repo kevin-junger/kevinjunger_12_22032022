@@ -26,6 +26,31 @@ const Title = styled.h2`
   opacity: 50%;
 `
 
+const TooltipBox = styled.div`
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+`
+
+const TooltipInfo = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 500;
+`
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active) {
+    return(
+      <TooltipBox>
+        <TooltipInfo>{payload[0].value} min</TooltipInfo>
+      </TooltipBox>
+    )
+  }
+
+  return null;
+}
+
 export default class SessionsChart extends Component {
   constructor(props) {
     super(props)
@@ -74,7 +99,9 @@ export default class SessionsChart extends Component {
                     fontWeight: 500,
                   }}
                 />
-                <Tooltip />
+                <Tooltip
+                  content={<CustomTooltip />}
+                />
                 <Line
                   type="monotone"
                   dataKey="sessionLength"
