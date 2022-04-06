@@ -34,7 +34,7 @@ export default class PerformanceChart extends Component {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
       }
-      
+
       return response.data.data
     })
     .then(data => {
@@ -62,9 +62,10 @@ export default class PerformanceChart extends Component {
     return(
       <Stat>
         { this.state.data &&
-          <ResponsiveContainer width="90%" height="100%">
+          <ResponsiveContainer width="100%" height="100%">
             <RadarChart
-              outerRadius={"90%"}
+              outerRadius={"60%"}
+              innerRadius={"0"}
               data={this.state.data}
             >
               <PolarGrid radialLines={false} />
