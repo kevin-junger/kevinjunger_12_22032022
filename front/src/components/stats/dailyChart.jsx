@@ -102,7 +102,18 @@ export default class DailyChart extends Component {
       return response.data.data
     })
     .then(data => {
-      this.setState({ data: data })
+      let sessions = []
+
+      data.sessions.forEach(session => {
+        const date = new Date(session.day)
+        sessions.push({
+          "day": date.getUTCDate(),
+          "kilogram": session.kilogram,
+          "calories": session.calories,
+        })
+      })
+      
+      this.setState({ data: sessions })
     })
     .catch(error => {
       console.log(error)
@@ -133,7 +144,7 @@ export default class DailyChart extends Component {
             </Header>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
-                data={this.state.data.sessions}
+                data={this.state.data}
                 margin={{ top: 80, right: 24, bottom: 32, left: 24 }}
                 barGap={8}
                 barCategoryGap="40%"

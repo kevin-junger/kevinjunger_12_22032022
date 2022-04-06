@@ -38,20 +38,20 @@ export default class PerformanceChart extends Component {
       return response.data.data
     })
     .then(data => {
-      const perfStats = []
+      const perfs = []
 
       for (const [kindKey, kindValue] of Object.entries(data.kind)) {
-        for (const datum of data.data) {
+        data.data.forEach(datum => {
           if (datum.kind === parseInt(kindKey, 10)) {
-            perfStats.push({
+            perfs.push({
               kind: kindValue.charAt(0).toUpperCase() + kindValue.slice(1),
               value: datum.value,
             })
           }
-        }
+        })
       }
 
-      this.setState({ data: perfStats })
+      this.setState({ data: perfs })
     })
     .catch(error => {
       console.log(error)

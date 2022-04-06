@@ -70,7 +70,19 @@ export default class SessionsChart extends Component {
       return response.data.data
     })
     .then(data => {
-      this.setState({ data: data })
+      let sessions = []
+
+      const daysByName = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+
+      data.sessions.forEach(session => {
+        const dayIndex = parseInt(session.day, 10) - 1
+        sessions.push({
+          "day": daysByName[dayIndex].charAt(0),
+          "sessionLength": session.sessionLength,
+        })
+      })
+      
+      this.setState({ data: sessions })
     })
     .catch(error => {
       console.log(error)
@@ -85,7 +97,7 @@ export default class SessionsChart extends Component {
             <Title>Durée moyenne des sessions</Title>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
-                data={this.state.data.sessions}
+                data={this.state.data}
                 margin={{ top: 68, right: 24, bottom: 24, left: 24 }}
               >
                 <XAxis
