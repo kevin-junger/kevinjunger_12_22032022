@@ -83,11 +83,33 @@ export default class GoalChart extends Component {
                 />
                 <text
                   x={"50%"}
-                  y={"50%"}
+                  y={"45%"}
+                  fontSize={26}
+                  fontWeight={"700"}
                   textAnchor="middle"
                   dominantBaseline="middle"
                 >
                   {this.state.data[0].value} %
+                </text>
+                <text
+                  x={"50%"}
+                  y={"55%"}
+                  fontSize={16}
+                  fontWeight={"500"}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >
+                  de votre
+                </text>
+                <text
+                  x={"50%"}
+                  y={"63%"}
+                  fontSize={16}
+                  fontWeight={"500"}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >
+                  objectif
                 </text>
               </RadialBarChart>
             </ResponsiveContainer>
