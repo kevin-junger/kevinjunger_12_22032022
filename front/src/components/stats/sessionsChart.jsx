@@ -26,6 +26,31 @@ const Title = styled.h2`
   opacity: 50%;
 `
 
+const TooltipBox = styled.div`
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+`
+
+const TooltipInfo = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 500;
+`
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active) {
+    return(
+      <TooltipBox>
+        <TooltipInfo>{payload[0].value} min</TooltipInfo>
+      </TooltipBox>
+    )
+  }
+
+  return null;
+}
+
 export default class SessionsChart extends Component {
   constructor(props) {
     super(props)
@@ -45,7 +70,19 @@ export default class SessionsChart extends Component {
       return response.data.data
     })
     .then(data => {
-      this.setState({ data: data })
+      let sessions = []
+
+      const daysByName = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+
+      data.sessions.forEach(session => {
+        const dayIndex = parseInt(session.day, 10) - 1
+        sessions.push({
+          "day": daysByName[dayIndex].charAt(0),
+          "sessionLength": session.sessionLength,
+        })
+      })
+      
+      this.setState({ data: sessions })
     })
     .catch(error => {
       console.log(error)
@@ -60,7 +97,7 @@ export default class SessionsChart extends Component {
             <Title>Durée moyenne des sessions</Title>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
-                data={this.state.data.sessions}
+                data={this.state.data}
                 margin={{ top: 68, right: 24, bottom: 24, left: 24 }}
               >
                 <XAxis
@@ -74,7 +111,9 @@ export default class SessionsChart extends Component {
                     fontWeight: 500,
                   }}
                 />
-                <Tooltip />
+                <Tooltip
+                  content={<CustomTooltip />}
+                />
                 <Line
                   type="monotone"
                   dataKey="sessionLength"

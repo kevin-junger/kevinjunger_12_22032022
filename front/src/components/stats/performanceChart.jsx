@@ -34,10 +34,24 @@ export default class PerformanceChart extends Component {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
       }
+
       return response.data.data
     })
     .then(data => {
-      this.setState({ data: data })
+      const perfs = []
+
+      for (const [kindKey, kindValue] of Object.entries(data.kind)) {
+        data.data.forEach(datum => {
+          if (datum.kind === parseInt(kindKey, 10)) {
+            perfs.push({
+              kind: kindValue.charAt(0).toUpperCase() + kindValue.slice(1),
+              value: datum.value,
+            })
+          }
+        })
+      }
+
+      this.setState({ data: perfs })
     })
     .catch(error => {
       console.log(error)
@@ -48,10 +62,11 @@ export default class PerformanceChart extends Component {
     return(
       <Stat>
         { this.state.data &&
-          <ResponsiveContainer width="90%" height="100%">
+          <ResponsiveContainer width="100%" height="100%">
             <RadarChart
-              outerRadius={"90%"}
-              data={this.state.data.data}
+              outerRadius={"60%"}
+              innerRadius={"0"}
+              data={this.state.data}
             >
               <PolarGrid radialLines={false} />
               <PolarAngleAxis
