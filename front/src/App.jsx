@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
-import HeaderUI from "./components/header"
+import Header from "./components/header/header"
 
 export default function App() {
   return(
     <>
-      <HeaderUI />
+      <Header />
       <Outlet />
     </>
   )

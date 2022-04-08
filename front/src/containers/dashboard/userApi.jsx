@@ -1,10 +1,10 @@
 import Axios from "axios"
 
 /**
- * @class Api
- * @classdesc Manages HTTP GET calls in order to fetch the necessary data
+ * @class UserApi
+ * @classdesc Manages HTTP GET calls in order to fetch the necessary data corresponding the user's id
  */
-export default class Api {
+export default class UserApi {
   constructor(userId) {
     this.baseUrl = "http://localhost:3000"
     this.userId = userId
