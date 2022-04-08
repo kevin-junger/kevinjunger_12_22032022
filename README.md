@@ -27,7 +27,7 @@ Le projet propose ces quatre points d'accès qui devront être utilisés pour r�
 - `http://localhost:3000/user/${userId}/average-sessions` - retourne la durée moyenne journalière sur une semaine des sessions de l'utilisateur correspondant à `userId` (durée mesurée en minutes) ;
 - `http://localhost:3000/user/${userId}/performance` - retourne les indices de performance par type (vitesse, endurance, etc.) de l'utilisateur correspondant à `userId`.
 
-**Pour le moment, seules les données de deux utilisateurs ont été simulées. Leurs `userId` sont respectivement `12` et ``18`.**
+**Pour le moment, seules les données de deux utilisateurs ont été simulées. Leurs `userId` sont respectivement `12` et `18`.**
 
 ## 4. Front-end
 
