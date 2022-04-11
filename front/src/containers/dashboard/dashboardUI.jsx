@@ -1,29 +1,28 @@
-import { Wrapper, Dashboard, Stats, Nutrition } from "./dashboardUIStyledComponents"
+import styled from "styled-components"
 
-import Greetings from "../../components/grettings"
-import DailyChart from "../../components/stats/dailyChart"
-import GoalChart from "../../components/stats/goalChart"
-import PerformanceChart from "../../components/stats/performanceChart"
-import SessionsChart from "../../components/stats/sessionsChart"
-import NutritionChart from "../../components/nutrition/nutritionChart"
+export const Wrapper = styled.section`
+  width: calc(100vw - 150px);
+  height: calc(100vh - 120px);
+  overflow: hidden;
+`
 
-export const UI = ({ api }) => {
-  if (api) {
-    return(
-      <Wrapper>
-      <Greetings api={api} />
-      <Dashboard>
-        <Stats>
-          <DailyChart api={api} />
-          <SessionsChart api={api} />
-          <PerformanceChart api={api} />
-          <GoalChart api={api} />
-        </Stats>
-        <Nutrition>
-          <NutritionChart api={api} />
-        </Nutrition>
-      </Dashboard>
-    </Wrapper>
-    )
-  }
-}
+export const Dashboard = styled.div`
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  column-gap: 2rem;
+  height: calc(100% - 158px);
+`
+
+export const Stats = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.5rem;
+`
+
+export const Nutrition = styled.div`
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 1rem;
+`

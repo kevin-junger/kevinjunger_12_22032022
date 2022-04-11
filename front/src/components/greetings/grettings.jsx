@@ -1,24 +1,5 @@
 import { Component } from "react"
-import styled from "styled-components"
-
-const Howdy = styled.div`
-  margin: 2rem;
-`
-
-const Hello = styled.h1`
-  font-size: 48px;
-  font-weight: 500;
-  margin-bottom: 1rem;
-`
-
-const Name = styled.em`
-  color: red;
-  font-style: normal;
-`
-
-const Congrats = styled.p`
-  font-size: 18px;
-`
+import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
 
 export default class Greetings extends Component {
   constructor(props) {
@@ -50,14 +31,14 @@ export default class Greetings extends Component {
 
   render() {
     return(
-      <>
+      <Howdy>
         { this.state.data &&
-          <Howdy>
+          <>
             <Hello>Bonjour <Name>{this.state.data}</Name></Hello>
             <Congrats>Félicitation ! Vous avez explosé vos objectifs hier 👏</Congrats>
-          </Howdy>
+          </>
         }
-      </>
+      </Howdy>
     )
   }
 }

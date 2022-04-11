@@ -1,5 +1,16 @@
 import { Component } from "react"
 import {
+  Stat,
+  Header,
+  Title,
+  Legend,
+  LegendColor,
+  LegendTitle,
+  TooltipBox,
+  TooltipList,
+  TooltipItem
+} from "./dailyUI"
+import {
   ResponsiveContainer,
   BarChart,
   CartesianGrid,
@@ -8,65 +19,6 @@ import {
   Bar,
   Tooltip,
 } from "recharts"
-import styled from "styled-components"
-
-const Stat = styled.div`
-  position: relative;
-  grid-area: 1 / 1 / 2 / 4;
-  background-color: #fbfbfb;
-  border-radius: 5px;
-`
-
-const Header = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  top: 1rem;
-  left: 1.5rem;
-  width: calc(100% - 3rem);
-`
-
-const Title = styled.h2`
-  font-size: 15px;
-  font-weight: 500;
-`
-
-const Legend = styled.div`
-  display: flex;
-  align-items: center;
-  width: 280px;
-  justify-content: space-between;
-`
-
-const LegendColor = styled.div`
-  margin-right: 0.2rem;
-`
-
-const LegendTitle = styled.p`
-  color: #74798c;
-  font-size: 14px;
-  font-weight: 500;
-`
-
-const TooltipBox = styled.div`
-  background-color: red;
-  padding: 0.5rem;
-  border-radius: 5px;
-`
-
-const TooltipList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`
-
-const TooltipItem = styled.li`
-  color: white;
-  font-size: 10px;
-  font-weight: 500;
-  text-align: center;
-`
 
 const CustomTooltip = ({ active, payload }) => {
   if (active) {
@@ -83,22 +35,19 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 }
 
-export default class DailyChart extends Component {
+export default class Daily extends Component {
   constructor(props) {
     super(props)
     this.state = { data: null }
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUserActivity()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
       }
+
       return response.data.data
     })
     .then(data => {

@@ -1,4 +1,5 @@
 import { Component } from "react"
+import { Stat } from "./performanceUI"
 import {
   Radar,
   RadarChart,
@@ -7,28 +8,13 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
-import styled from "styled-components"
-
-const Stat = styled.div`
-  grid-area: 2 / 2 / 3 / 3;
-  background-color: #282D30;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-export default class PerformanceChart extends Component {
+export default class Performance extends Component {
   constructor(props) {
     super(props)
     this.state = { data: null }
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUserPerformance()
     .then(response => {
       if(response.statusText !== "OK") {
