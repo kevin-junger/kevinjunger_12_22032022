@@ -10,7 +10,10 @@ import {
 export default class Goal extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
   }
 
   componentDidMount() {
@@ -25,11 +28,16 @@ export default class Goal extends Component {
       this.setState({
         data: [
           { value: data.todayScore * 100 }
-        ]
+        ],
+        error: false,
       })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
@@ -92,6 +100,11 @@ export default class Goal extends Component {
                 </text>
               </RadialBarChart>
             </ResponsiveContainer>
+          </>
+        }
+        { this.state.error &&
+          <>
+            <p>Chargement impossible</p>
           </>
         }
       </Stat>

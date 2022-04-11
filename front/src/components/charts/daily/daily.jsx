@@ -38,7 +38,10 @@ const CustomTooltip = ({ active, payload }) => {
 export default class Daily extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
   }
 
   componentDidMount() {
@@ -62,10 +65,17 @@ export default class Daily extends Component {
         })
       })
       
-      this.setState({ data: sessions })
+      this.setState({
+        data: sessions,
+        error: false,
+      })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
@@ -130,6 +140,11 @@ export default class Daily extends Component {
                 />
               </BarChart>
             </ResponsiveContainer>
+          </>
+        }
+        { this.state.error &&
+          <>
+            <p>Chargement impossible</p>
           </>
         }
       </Stat>

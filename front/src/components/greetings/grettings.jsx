@@ -4,14 +4,13 @@ import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
 export default class Greetings extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
@@ -21,11 +20,16 @@ export default class Greetings extends Component {
     })
     .then(data => {
       this.setState({
-        data: data.userInfos.firstName
+        data: data.userInfos.firstName,
+        error: false,
       })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
@@ -36,6 +40,12 @@ export default class Greetings extends Component {
           <>
             <Hello>Bonjour <Name>{this.state.data}</Name></Hello>
             <Congrats>Félicitation ! Vous avez explosé vos objectifs hier 👏</Congrats>
+          </>
+        }
+        { this.state.error &&
+          <>
+            <Hello>Erreur</Hello>
+            <Congrats>Veuillez réessayer</Congrats>
           </>
         }
       </Howdy>

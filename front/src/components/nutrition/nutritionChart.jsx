@@ -12,10 +12,6 @@ export default class NutritionChart extends Component {
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {

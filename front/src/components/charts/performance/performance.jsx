@@ -11,7 +11,10 @@ import {
 export default class Performance extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
   }
 
   componentDidMount() {
@@ -39,10 +42,17 @@ export default class Performance extends Component {
         })
       }
 
-      this.setState({ data: perfs })
+      this.setState({
+        data: perfs,
+        error: false,
+      })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
@@ -74,6 +84,11 @@ export default class Performance extends Component {
               />
             </RadarChart>
           </ResponsiveContainer>
+        }
+        { this.state.error &&
+          <>
+            <p>Chargement impossible</p>
+          </>
         }
       </Stat>
     )
