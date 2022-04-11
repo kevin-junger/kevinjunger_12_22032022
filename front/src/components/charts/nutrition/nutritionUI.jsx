@@ -1,17 +1,24 @@
 import styled from "styled-components"
 
-const Info = styled.div`
+export const Card = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+`
+
+export const Info = styled.div`
   margin-left: 1.5rem;
 `
 
-const Title = styled.em`
+export const Title = styled.em`
   font-style: normal;
   font-size: 14px;
   font-weight: 500;
   color: #74798C;
 `
 
-const Datum = styled.h3`
+export const Datum = styled.h3`
   font-size: 20px;
   font-weight: 700;
   margin-top: 0;
@@ -27,28 +34,9 @@ const iconMixin = props => {
   }
 }
 
-const Icon = styled.div`
+export const Icon = styled.div`
   ${iconMixin}
   margin-left: 10%;
   padding: 1.5rem;
   border-radius: 5px;
 `
-
-export default function NutritionCard(props) {
-  const category = props.category
-  const title = props.title
-  const datum = props.datum
-  const Vector = props.vector
-
-  return(
-    <>
-      <Icon category={category}>
-        <Vector />
-      </Icon>
-      <Info>
-        <Datum>{datum} {category === 'calorieCount' ? 'kcal' : 'g'}</Datum>
-        <Title>{title}</Title>
-      </Info>
-    </>
-  )
-}

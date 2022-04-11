@@ -21,7 +21,7 @@ export const Stats = styled.div`
   gap: 1.5rem;
 `
 
-export const Nutrition = styled.div`
+export const Aside = styled.div`
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   row-gap: 1rem;

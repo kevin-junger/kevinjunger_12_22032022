@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom"
 import GetUserApi from "./getUserApi"
-import { Wrapper, Dashboard, Stats, Nutrition } from "./dashboardUI"
+import { Wrapper, Dashboard, Stats, Aside } from "./dashboardUI"
 import Greetings from "../../components/greetings/grettings"
 import Daily from "../../components/charts/daily/daily"
 import Goal from "../../components/charts/goal/goal"
 import Performance from "../../components/charts/performance/performance"
 import Sessions from "../../components/charts/sessions/sessions"
-import NutritionChart from "../../components/nutrition/nutritionChart"
+import Nutrition from "../../components/charts/nutrition/nutrition"
 
 export default function DashboardUI() {
   let params = useParams()
@@ -22,9 +22,9 @@ export default function DashboardUI() {
           <Performance api={api} />
           <Goal api={api} />
         </Stats>
-        <Nutrition>
-          <NutritionChart api={api} />
-        </Nutrition>
+        <Aside>
+          <Nutrition api={api} />
+        </Aside>
       </Dashboard>
     </Wrapper>
   )

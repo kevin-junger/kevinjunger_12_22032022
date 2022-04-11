@@ -1,20 +1,17 @@
 import { Component } from "react"
-import NutritionCard from "./nutritionCard"
+import {
+  Card,
+  Info,
+  Title,
+  Datum,
+  Icon
+} from "./nutritionUI"
 import CaloriesIcon from "./icons/calories"
 import LipidsIcon from "./icons/lipids"
 import CarbohydratesIcon from "./icons/carbohydrates"
 import ProteinsIcon from "./icons/proteins"
 
-import styled from "styled-components"
-
-const Card = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: #fbfbfb;
-  border-radius: 5px;
-`
-
-export default class NutritionChart extends Component {
+export default class Nutrition extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -67,7 +64,13 @@ export default class NutritionChart extends Component {
       <>
         { this.state.data && this.state.data.map(datum =>
           <Card key={datum.category}>
-            <NutritionCard category={datum.category} title={datum.title} datum={datum.value} vector={datum.icon} />
+            <Icon category={datum.category}>
+              {datum.icon()}
+            </Icon>
+            <Info>
+              <Datum>{datum.value} {datum.category === 'calorieCount' ? 'kcal' : 'g'}</Datum>
+              <Title>{datum.title}</Title>
+            </Info>
           </Card>
         )
         }
