@@ -1,10 +1,10 @@
-import { render } from 'react-dom'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './css/normalize.css'
-import './css/font.css'
-import App from './App'
-import User from './containers/user'
-import Dashboard from './containers/dashboard/dashboard'
+import { render } from "react-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import "./css/normalize.css"
+import "./css/font.css"
+import App from "./App"
+import User from "./containers/user"
+import Dashboard from "./containers/dashboard/dashboard"
 
 const rootElement = document.getElementById("root")
 

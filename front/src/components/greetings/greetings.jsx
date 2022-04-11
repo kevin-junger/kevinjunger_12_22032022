@@ -1,4 +1,6 @@
 import { Component } from "react"
+import PropTypes from "prop-types"
+import GetUserApi from "../../containers/dashboard/getUserApi"
 import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
 
 export default class Greetings extends Component {
@@ -8,6 +10,10 @@ export default class Greetings extends Component {
       data: null,
       error: false,
     }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {

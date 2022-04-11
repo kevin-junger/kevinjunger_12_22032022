@@ -1,4 +1,6 @@
 import { Component } from "react"
+import PropTypes from "prop-types"
+import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
   Stat,
   Header,
@@ -42,6 +44,10 @@ export default class Daily extends Component {
       data: null,
       error: false,
     }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {

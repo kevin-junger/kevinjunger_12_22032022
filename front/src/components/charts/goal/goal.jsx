@@ -1,4 +1,6 @@
 import { Component } from "react"
+import PropTypes from "prop-types"
+import GetUserApi from "../../../containers/dashboard/getUserApi"
 import { Stat, Title } from "./goalUI"
 import {
   RadialBarChart,
@@ -14,6 +16,10 @@ export default class Goal extends Component {
       data: null,
       error: false,
     }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {

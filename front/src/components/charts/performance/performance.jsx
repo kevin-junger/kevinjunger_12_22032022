@@ -1,4 +1,6 @@
 import { Component } from "react"
+import PropTypes from "prop-types"
+import GetUserApi from "../../../containers/dashboard/getUserApi"
 import { Stat } from "./performanceUI"
 import {
   Radar,
@@ -15,6 +17,10 @@ export default class Performance extends Component {
       data: null,
       error: false,
     }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {

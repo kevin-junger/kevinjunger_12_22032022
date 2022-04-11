@@ -1,4 +1,5 @@
 import Axios from "axios"
+import PropTypes from "prop-types"
 
 /**
  * @class GetUserApi
@@ -8,6 +9,10 @@ export default class GetUserApi {
   constructor(userId) {
     this.baseUrl = "http://localhost:3000"
     this.userId = `/user/${userId}`
+  }
+
+  static propTypes = {
+    userId: PropTypes.number.isRequired,
   }
 
   /**

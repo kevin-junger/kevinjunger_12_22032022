@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import GetUserApi from "./getUserApi"
 import { Wrapper, Dashboard, Stats, Aside } from "./dashboardUI"
-import Greetings from "../../components/greetings/grettings"
+import Greetings from "../../components/greetings/greetings"
 import Daily from "../../components/charts/daily/daily"
 import Goal from "../../components/charts/goal/goal"
 import Performance from "../../components/charts/performance/performance"
