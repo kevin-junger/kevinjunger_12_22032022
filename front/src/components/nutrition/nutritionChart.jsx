@@ -8,7 +8,10 @@ import ProteinsIcon from "./icons/proteins"
 export default class NutritionChart extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
   }
 
   componentDidMount() {
@@ -21,11 +24,16 @@ export default class NutritionChart extends Component {
     })
     .then(data => {
       this.setState({
-        data: data.keyData
+        data: data.keyData,
+        error: false,
       })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
