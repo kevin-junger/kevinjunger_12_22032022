@@ -1,36 +1,22 @@
 import { Component } from "react"
-import styled from "styled-components"
-
-const Howdy = styled.div`
-  margin: 2rem;
-`
-
-const Hello = styled.h1`
-  font-size: 48px;
-  font-weight: 500;
-  margin-bottom: 1rem;
-`
-
-const Name = styled.em`
-  color: red;
-  font-style: normal;
-`
-
-const Congrats = styled.p`
-  font-size: 18px;
-`
+import PropTypes from "prop-types"
+import GetUserApi from "../../containers/dashboard/getUserApi"
+import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
 
 export default class Greetings extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
@@ -40,24 +26,35 @@ export default class Greetings extends Component {
     })
     .then(data => {
       this.setState({
-        data: data.userInfos.firstName
+        data: data.userInfos.firstName,
+        error: false,
       })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
   render() {
     return(
-      <>
+      <Howdy>
         { this.state.data &&
-          <Howdy>
+          <>
             <Hello>Bonjour <Name>{this.state.data}</Name></Hello>
             <Congrats>Félicitation ! Vous avez explosé vos objectifs hier 👏</Congrats>
-          </Howdy>
+          </>
         }
-      </>
+        { this.state.error &&
+          <>
+            <Hello>Erreur</Hello>
+            <Congrats>Veuillez réessayer</Congrats>
+          </>
+        }
+      </Howdy>
     )
   }
 }

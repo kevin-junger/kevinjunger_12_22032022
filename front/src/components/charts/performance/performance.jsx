@@ -1,4 +1,7 @@
 import { Component } from "react"
+import PropTypes from "prop-types"
+import GetUserApi from "../../../containers/dashboard/getUserApi"
+import { Stat } from "./performanceUI"
 import {
   Radar,
   RadarChart,
@@ -7,28 +10,20 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
-import styled from "styled-components"
-
-const Stat = styled.div`
-  grid-area: 2 / 2 / 3 / 3;
-  background-color: #282D30;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-export default class PerformanceChart extends Component {
+export default class Performance extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUserPerformance()
     .then(response => {
       if(response.statusText !== "OK") {
@@ -40,21 +35,30 @@ export default class PerformanceChart extends Component {
     .then(data => {
       const perfs = []
 
-      for (const [kindKey, kindValue] of Object.entries(data.kind)) {
+      const kinds = ['Cardio', 'Energie', 'Endurance', 'Force', 'Vitesse', 'Intensité']
+
+      for (const [kindKey] of Object.entries(data.kind)) {
         data.data.forEach(datum => {
           if (datum.kind === parseInt(kindKey, 10)) {
             perfs.push({
-              kind: kindValue.charAt(0).toUpperCase() + kindValue.slice(1),
+              kind: kinds[parseInt(kindKey, 10) - 1],
               value: datum.value,
             })
           }
         })
       }
 
-      this.setState({ data: perfs })
+      this.setState({
+        data: perfs,
+        error: false,
+      })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
@@ -86,6 +90,11 @@ export default class PerformanceChart extends Component {
               />
             </RadarChart>
           </ResponsiveContainer>
+        }
+        { this.state.error &&
+          <>
+            <p>Chargement impossible</p>
+          </>
         }
       </Stat>
     )

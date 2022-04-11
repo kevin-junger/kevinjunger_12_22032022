@@ -1,40 +1,28 @@
 import { Component } from "react"
+import PropTypes from "prop-types"
+import GetUserApi from "../../../containers/dashboard/getUserApi"
+import { Stat, Title } from "./goalUI"
 import {
   RadialBarChart,
   RadialBar,
   ResponsiveContainer,
   PolarAngleAxis
 } from "recharts"
-import styled from "styled-components"
 
-const Stat = styled.div`
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  grid-area: 2 / 3 / 3 / 4;
-  background-color: #fbfbfb;
-  border-radius: 5px;
-`
-
-const Title = styled.h2`
-  left: 1.5rem;
-  top: 0.5rem;
-  position: absolute;
-  font-size: 15px;
-  font-weight: 500;
-`
-
-export default class GoalChart extends Component {
+export default class Goal extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: null }
+    this.state = {
+      data: null,
+      error: false,
+    }
+  }
+
+  static propTypes = {
+    api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
   componentDidMount() {
-    this.fetch()
-  }
-
-  fetch() {
     this.props.api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
@@ -46,11 +34,16 @@ export default class GoalChart extends Component {
       this.setState({
         data: [
           { value: data.todayScore * 100 }
-        ]
+        ],
+        error: false,
       })
     })
     .catch(error => {
       console.log(error)
+      this.setState({
+        data: null,
+        error: true,
+      })
     })
   }
 
@@ -113,6 +106,11 @@ export default class GoalChart extends Component {
                 </text>
               </RadialBarChart>
             </ResponsiveContainer>
+          </>
+        }
+        { this.state.error &&
+          <>
+            <p>Chargement impossible</p>
           </>
         }
       </Stat>

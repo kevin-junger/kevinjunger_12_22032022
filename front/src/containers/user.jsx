@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
-import SidebarUI from "../components/sidebar"
 import styled from "styled-components"
+import Sidebar from "../components/sidebar/sidebar"
 
 const Main = styled.main`
   display: flex;
@@ -9,7 +9,7 @@ const Main = styled.main`
 export default function User() {
   return(
     <Main>
-      <SidebarUI />
+      <Sidebar />
       <Outlet />
     </Main>
   )
