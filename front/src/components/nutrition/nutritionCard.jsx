@@ -1,12 +1,5 @@
 import styled from "styled-components"
 
-const Card = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: #fbfbfb;
-  border-radius: 5px;
-`
-
 const Info = styled.div`
   margin-left: 1.5rem;
 `
@@ -27,9 +20,9 @@ const Datum = styled.h3`
 
 const iconMixin = props => {
   switch(true) {
-    case props.category === "proteins": return "background-color: rgba(74, 184, 255, 0.1);"
-    case props.category === "glucids": return "background-color: rgba(249, 206, 35, 0.1);"
-    case props.category === "fats": return "background-color: rgba(253, 81, 129, 0.1);"
+    case props.category === "proteinCount": return "background-color: rgba(74, 184, 255, 0.1);"
+    case props.category === "carbohydrateCount": return "background-color: rgba(249, 206, 35, 0.1);"
+    case props.category === "lipidCount": return "background-color: rgba(253, 81, 129, 0.1);"
     default: return "background-color: rgba(255, 0, 0, 0.1);"
   }
 }
@@ -48,14 +41,14 @@ export default function NutritionCard(props) {
   const Vector = props.vector
 
   return(
-    <Card>
+    <>
       <Icon category={category}>
         <Vector />
       </Icon>
       <Info>
-        <Datum>{datum} {category === 'calories' ? 'kcal' : 'g'}</Datum>
+        <Datum>{datum} {category === 'calorieCount' ? 'kcal' : 'g'}</Datum>
         <Title>{title}</Title>
       </Info>
-    </Card>
+    </>
   )
 }

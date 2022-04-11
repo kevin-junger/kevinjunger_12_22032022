@@ -1,9 +1,18 @@
 import { Component } from "react"
 import NutritionCard from "./nutritionCard"
 import CaloriesIcon from "./icons/calories"
-import FatsIcon from "./icons/fats"
-import GlucidsIcon from "./icons/glucids"
+import LipidsIcon from "./icons/lipids"
+import CarbohydratesIcon from "./icons/carbohydrates"
 import ProteinsIcon from "./icons/proteins"
+
+import styled from "styled-components"
+
+const Card = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+`
 
 export default class NutritionChart extends Component {
   constructor(props) {
@@ -23,8 +32,24 @@ export default class NutritionChart extends Component {
       return response.data.data
     })
     .then(data => {
+      const keyData = []
+      const categories = ['Calories', 'Protéines', 'Glucides', 'Lipides']
+      const catIcons = [CaloriesIcon, ProteinsIcon, CarbohydratesIcon, LipidsIcon]
+
+      let i = 0
+
+      for (const [dataKey, dataValue] of Object.entries(data.keyData)) {
+        keyData.push({
+          category: dataKey,
+          title: categories[i],
+          value: dataValue,
+          icon: catIcons[i]
+        })
+        i += 1
+      }
+
       this.setState({
-        data: data.keyData,
+        data: keyData,
         error: false,
       })
     })
@@ -40,13 +65,11 @@ export default class NutritionChart extends Component {
   render() {
     return(
       <>
-        { this.state.data &&
-          <>
-            <NutritionCard category="calories" title="Calories" datum={this.state.data.calorieCount} vector={CaloriesIcon} />
-            <NutritionCard category="proteins" title="Protéines" datum={this.state.data.proteinCount} vector={ProteinsIcon} />
-            <NutritionCard category="glucids" title="Glucides" datum={this.state.data.carbohydrateCount} vector={GlucidsIcon} />
-            <NutritionCard category="fats" title="Lipides" datum={this.state.data.lipidCount} vector={FatsIcon} />
-          </>
+        { this.state.data && this.state.data.map(datum =>
+          <Card key={datum.category}>
+            <NutritionCard category={datum.category} title={datum.title} datum={datum.value} vector={datum.icon} />
+          </Card>
+        )
         }
       </>
     )
