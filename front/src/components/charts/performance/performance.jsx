@@ -26,11 +26,13 @@ export default class Performance extends Component {
     .then(data => {
       const perfs = []
 
-      for (const [kindKey, kindValue] of Object.entries(data.kind)) {
+      const kinds = ['Cardio', 'Energie', 'Endurance', 'Force', 'Vitesse', 'Intensité']
+
+      for (const [kindKey] of Object.entries(data.kind)) {
         data.data.forEach(datum => {
           if (datum.kind === parseInt(kindKey, 10)) {
             perfs.push({
-              kind: kindValue.charAt(0).toUpperCase() + kindValue.slice(1),
+              kind: kinds[parseInt(kindKey, 10) - 1],
               value: datum.value,
             })
           }
