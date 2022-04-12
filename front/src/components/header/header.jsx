@@ -1,6 +1,10 @@
 import logo from "./logo.png"
 import { Header, Navbar, NavMenu, NavMenuElt, Logo } from "./headerUI"
 
+/**
+ * Displays the global header
+ * @returns { StyledComponent }
+ */
 export default function HeaderUI() {
   return(
     <Header>

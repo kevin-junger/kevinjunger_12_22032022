@@ -22,6 +22,11 @@ import {
   Tooltip,
 } from "recharts"
 
+/**
+ * Creates and returns the tooltip box when hovering any of the chart's entries, or null if not
+ * @param {*} param0 - the tooltip's state and the values to be displayed
+ * @returns { StyledComponent | null }
+ */
 const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return(
@@ -37,6 +42,11 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 }
 
+/**
+ * @class Daily
+ * @classdesc Displays the analytics for the user's daily activity via a bar chart
+ * @param { GetUserApi } api - Mandatory
+ */
 export default class Daily extends Component {
   constructor(props) {
     super(props)
@@ -50,6 +60,9 @@ export default class Daily extends Component {
     api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
+  /**
+   * Fetches and stores the user's daily activity over the last 7 days
+   */
   componentDidMount() {
     this.props.api.getUserActivity()
     .then(response => {

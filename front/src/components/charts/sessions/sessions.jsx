@@ -15,6 +15,11 @@ import {
   ResponsiveContainer
 } from "recharts"
 
+/**
+ * Creates and returns the tooltip box when hovering any of the chart's entries, or null if not
+ * @param {*} param0 - the tooltip's state and the values to be displayed
+ * @returns { StyledComponent | null }
+ */
 const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return(
@@ -27,6 +32,11 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 }
 
+/**
+ * @class Sessions
+ * @classdesc Displays the user's average session duration per day on a weekly basis
+ * @param { GetUserApi } api - Mandatory
+ */
 export default class Sessions extends Component {
   constructor(props) {
     super(props)
@@ -40,6 +50,9 @@ export default class Sessions extends Component {
     api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
+  /**
+   * Fetches and stores the average daily duration
+   */
   componentDidMount() {
     this.props.api.getUserAverageSessions()
     .then(response => {

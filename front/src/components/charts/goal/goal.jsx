@@ -9,6 +9,11 @@ import {
   PolarAngleAxis
 } from "recharts"
 
+/**
+ * @class Goal
+ * @classdesc Displays the user's daily goal achievement via a radial bar chart
+ * @param { GetUserApi } api - Mandatory
+ */
 export default class Goal extends Component {
   constructor(props) {
     super(props)
@@ -22,6 +27,9 @@ export default class Goal extends Component {
     api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
+  /**
+   * Fetches and stores the user's current percentage of achievement
+   */
   componentDidMount() {
     this.props.api.getUser()
     .then(response => {

@@ -10,6 +10,11 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
+/**
+ * @class Performance
+ * @classdesc Displays the analytics for the user's performance stats
+ * @param { GetUserApi } api - Mandatory
+ */
 export default class Performance extends Component {
   constructor(props) {
     super(props)
@@ -23,6 +28,9 @@ export default class Performance extends Component {
     api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
+  /**
+   * Fetches and stores the user's performance indexes
+   */
   componentDidMount() {
     this.props.api.getUserPerformance()
     .then(response => {

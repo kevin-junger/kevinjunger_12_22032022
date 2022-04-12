@@ -13,6 +13,11 @@ import LipidsIcon from "./icons/lipids"
 import CarbohydratesIcon from "./icons/carbohydrates"
 import ProteinsIcon from "./icons/proteins"
 
+/**
+ * @class Nutrtition
+ * @classdesc Displays the user's daily nutrition information (calories, etc.) via cards on the right
+ * @param { GetUserApi } api - Mandatory
+ */
 export default class Nutrition extends Component {
   constructor(props) {
     super(props)
@@ -26,6 +31,9 @@ export default class Nutrition extends Component {
     api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
+  /**
+   * Fetches and stores the user's nutritional information
+   */
   componentDidMount() {
     this.props.api.getUser()
     .then(response => {

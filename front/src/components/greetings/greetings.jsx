@@ -3,6 +3,11 @@ import PropTypes from "prop-types"
 import GetUserApi from "../../containers/dashboard/getUserApi"
 import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
 
+/**
+ * @class Greetings
+ * @classdesc Displays a greetings message on the user's dashboard
+ * @param { GetUserApi } api - Mandatory
+ */
 export default class Greetings extends Component {
   constructor(props) {
     super(props)
@@ -16,6 +21,9 @@ export default class Greetings extends Component {
     api: PropTypes.instanceOf(GetUserApi).isRequired,
   }
 
+  /**
+   * Fetches the user's name and updates the component's state
+   */
   componentDidMount() {
     this.props.api.getUser()
     .then(response => {
