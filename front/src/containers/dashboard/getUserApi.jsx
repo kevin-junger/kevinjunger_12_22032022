@@ -9,7 +9,14 @@ import PropTypes from "prop-types"
 export default class GetUserApi {
   constructor(userId) {
     this.baseUrl = "http://localhost:3000"
+    this.headers = {
+      Accept: "application/json",
+    }
     this.userId = `/user/${userId}`
+    this.instance = Axios.create({
+      baseURL: this.baseUrl,
+      headers: this.headers,
+    })
   }
 
   static propTypes = {
@@ -17,21 +24,12 @@ export default class GetUserApi {
   }
 
   /**
-   * Creates an Axios instance, then from the desired path, returns an Axios response with the corresponding data.
+   * From the previously created Axios instance and with the desired path, returns an Axios response with the corresponding data.
    * @param { string } path - Can be left empty (which means the URI will be `/user/${userId}`), or it'll be add to the end of the default URI (e.g. `/user/${userId}/activity` if `path = "activity"`)
    * @returns { object }
    */
   init(path = '') {
-    let headers = {
-      Accept: "application/json",
-    }
-    
-    const instance = Axios.create({
-      baseURL: this.baseUrl,
-      headers: headers,
-    })
-
-    return instance.get(`${this.userId}${path}`)
+    return this.instance.get(`${this.userId}${path}`)
   }
 
   /**
