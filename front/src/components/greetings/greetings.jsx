@@ -12,6 +12,7 @@ export default class Greetings extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       data: null,
       error: false,
     }
@@ -34,6 +35,7 @@ export default class Greetings extends Component {
     })
     .then(data => {
       this.setState({
+        loading: false,
         data: data.userInfos.firstName,
         error: false,
       })
@@ -41,6 +43,7 @@ export default class Greetings extends Component {
     .catch(error => {
       console.log(error)
       this.setState({
+        loading: false,
         data: null,
         error: true,
       })
@@ -50,6 +53,12 @@ export default class Greetings extends Component {
   render() {
     return(
       <Howdy>
+        { this.state.loading &&
+          <>
+            <Hello>Chargement</Hello>
+            <Congrats>Veuillez patienter</Congrats>
+          </>
+        }
         { this.state.data &&
           <>
             <Hello>Bonjour <Name>{this.state.data}</Name></Hello>

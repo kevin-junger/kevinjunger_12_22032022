@@ -41,6 +41,7 @@ export default class Sessions extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       data: null,
       error: false,
     }
@@ -75,6 +76,7 @@ export default class Sessions extends Component {
       })
       
       this.setState({
+        loading: false,
         data: sessions,
         error: false,
       })
@@ -82,6 +84,7 @@ export default class Sessions extends Component {
     .catch(error => {
       console.log(error)
       this.setState({
+        loading: false,
         data: null,
         error: true,
       })
@@ -91,6 +94,11 @@ export default class Sessions extends Component {
   render() {
     return(
       <Stat>
+        { this.state.loading &&
+          <>
+            <p>Chargement en cours</p>
+          </>
+        }
         { this.state.data &&
           <>
             <Title>Durée moyenne des sessions</Title>

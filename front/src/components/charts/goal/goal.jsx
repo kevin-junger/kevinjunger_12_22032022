@@ -18,6 +18,7 @@ export default class Goal extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       data: null,
       error: false,
     }
@@ -40,6 +41,7 @@ export default class Goal extends Component {
     })
     .then(data => {
       this.setState({
+        loading: false,
         data: [
           { value: data.todayScore * 100 }
         ],
@@ -49,6 +51,7 @@ export default class Goal extends Component {
     .catch(error => {
       console.log(error)
       this.setState({
+        loading: false,
         data: null,
         error: true,
       })
@@ -58,6 +61,11 @@ export default class Goal extends Component {
   render() {
     return(
       <Stat>
+        { this.state.loading &&
+          <>
+            <p>Chargement en cours</p>
+          </>
+        }
         { this.state.data &&
           <>
             <Title>Score</Title>

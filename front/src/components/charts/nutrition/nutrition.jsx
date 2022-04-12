@@ -22,6 +22,7 @@ export default class Nutrition extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       data: null,
       error: false,
     }
@@ -60,6 +61,7 @@ export default class Nutrition extends Component {
       }
 
       this.setState({
+        loading: false,
         data: keyData,
         error: false,
       })
@@ -67,6 +69,7 @@ export default class Nutrition extends Component {
     .catch(error => {
       console.log(error)
       this.setState({
+        loading: false,
         data: null,
         error: true,
       })
@@ -76,6 +79,11 @@ export default class Nutrition extends Component {
   render() {
     return(
       <>
+        { this.state.loading &&
+          <>
+            <p>Chargement en cours</p>
+          </>
+        }
         { this.state.data && this.state.data.map(datum =>
           <Card key={datum.category}>
             <Icon category={datum.category}>
@@ -87,6 +95,11 @@ export default class Nutrition extends Component {
             </Info>
           </Card>
         )
+        }
+        { this.state.error &&
+          <>
+            <p>Chargement impossible</p>
+          </>
         }
       </>
     )

@@ -19,6 +19,7 @@ export default class Performance extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       data: null,
       error: false,
     }
@@ -57,6 +58,7 @@ export default class Performance extends Component {
       }
 
       this.setState({
+        loading: false,
         data: perfs,
         error: false,
       })
@@ -64,6 +66,7 @@ export default class Performance extends Component {
     .catch(error => {
       console.log(error)
       this.setState({
+        loading: false,
         data: null,
         error: true,
       })
@@ -73,6 +76,11 @@ export default class Performance extends Component {
   render() {
     return(
       <Stat>
+        { this.state.loading &&
+          <>
+            <p>Chargement en cours</p>
+          </>
+        }
         { this.state.data &&
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart
