@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
-export const Howdy = styled.div`
+export const Container = styled.div`
   height: 95px;
   margin: 2rem;
 `
 
-export const Hello = styled.h1`
+export const Heading = styled.h1`
   font-size: 48px;
   font-weight: 500;
   margin-bottom: 1rem;
@@ -16,6 +16,6 @@ export const Name = styled.em`
   font-style: normal;
 `
 
-export const Congrats = styled.p`
+export const Subheading = styled.p`
   font-size: 18px;
 `

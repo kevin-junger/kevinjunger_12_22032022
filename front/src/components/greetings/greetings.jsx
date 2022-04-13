@@ -1,7 +1,7 @@
 import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../containers/dashboard/getUserApi"
-import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
+import { Container, Heading, Name, Subheading } from "./greetingsUI"
 
 /**
  * @class Greetings
@@ -52,26 +52,26 @@ export default class Greetings extends Component {
 
   render() {
     return(
-      <Howdy>
+      <Container>
         { this.state.loading &&
           <>
-            <Hello>Chargement</Hello>
-            <Congrats>Veuillez patienter</Congrats>
+            <Heading>Chargement</Heading>
+            <Subheading>Veuillez patienter</Subheading>
           </>
         }
         { this.state.data &&
           <>
-            <Hello>Bonjour <Name>{this.state.data}</Name></Hello>
-            <Congrats>Félicitation ! Vous avez explosé vos objectifs hier 👏</Congrats>
+            <Heading>Bonjour <Name>{this.state.data}</Name></Heading>
+            <Subheading>Félicitation ! Vous avez explosé vos objectifs hier 👏</Subheading>
           </>
         }
         { this.state.error &&
           <>
-            <Hello>Erreur</Hello>
-            <Congrats>Veuillez réessayer</Congrats>
+            <Heading>Erreur</Heading>
+            <Subheading>Veuillez réessayer</Subheading>
           </>
         }
-      </Howdy>
+      </Container>
     )
   }
 }

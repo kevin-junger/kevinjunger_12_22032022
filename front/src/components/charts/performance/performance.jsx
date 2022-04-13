@@ -1,7 +1,11 @@
 import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import { Stat } from "./performanceUI"
+import {
+  Loading,
+  Loader,
+  Stat,
+} from "./performanceUI"
 import {
   Radar,
   RadarChart,
@@ -75,44 +79,46 @@ export default class Performance extends Component {
 
   render() {
     return(
-      <Stat>
+      <>
         { this.state.loading &&
-          <>
-            <p>Chargement en cours</p>
-          </>
+          <Loading>
+            <Loader />
+          </Loading>
         }
         { this.state.data &&
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart
-              outerRadius={"60%"}
-              innerRadius={"0"}
-              data={this.state.data}
-            >
-              <PolarGrid radialLines={false} />
-              <PolarAngleAxis
-                dataKey="kind"
-                stroke="white"
-                dy={4}
-                tickLine={false}
-                tick={{
-                  fontSize: 12,
-                  fontWeight: 500,
-                }} />
-              <Radar
-                dataKey="value"
-                stroke="transparent"
-                fill="#ff0000"
-                fillOpacity={0.7}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
+          <Stat>
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart
+                outerRadius={"60%"}
+                innerRadius={"0"}
+                data={this.state.data}
+              >
+                <PolarGrid radialLines={false} />
+                <PolarAngleAxis
+                  dataKey="kind"
+                  stroke="white"
+                  dy={4}
+                  tickLine={false}
+                  tick={{
+                    fontSize: 12,
+                    fontWeight: 500,
+                  }} />
+                <Radar
+                  dataKey="value"
+                  stroke="transparent"
+                  fill="#ff0000"
+                  fillOpacity={0.7}
+                />
+              </RadarChart>
+            </ResponsiveContainer>
+          </Stat>
         }
         { this.state.error &&
           <>
             <p>Chargement impossible</p>
           </>
         }
-      </Stat>
+      </>
     )
   }
 }

@@ -2,11 +2,13 @@ import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
+  Loading,
+  Loader,
   Card,
   Info,
   Title,
   Datum,
-  Icon
+  Icon,
 } from "./nutritionUI"
 import CaloriesIcon from "./icons/calories"
 import LipidsIcon from "./icons/lipids"
@@ -79,9 +81,20 @@ export default class Nutrition extends Component {
   render() {
     return(
       <>
-        { this.state.loading &&
+        { this.state.loading && 
           <>
-            <p>Chargement en cours</p>
+            <Loading>
+              <Loader />
+            </Loading>
+            <Loading>
+              <Loader />
+            </Loading>
+            <Loading>
+              <Loader />
+            </Loading>
+            <Loading>
+              <Loader />
+            </Loading>
           </>
         }
         { this.state.data && this.state.data.map(datum =>

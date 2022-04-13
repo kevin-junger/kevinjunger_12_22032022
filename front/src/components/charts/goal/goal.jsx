@@ -1,7 +1,12 @@
 import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import { Stat, Title } from "./goalUI"
+import {
+  Loading,
+  Loader,
+  Stat,
+  Title,
+} from "./goalUI"
 import {
   RadialBarChart,
   RadialBar,
@@ -60,14 +65,14 @@ export default class Goal extends Component {
 
   render() {
     return(
-      <Stat>
+      <>
         { this.state.loading &&
-          <>
-            <p>Chargement en cours</p>
-          </>
+          <Loading>
+            <Loader />
+          </Loading>
         }
         { this.state.data &&
-          <>
+          <Stat>
             <Title>Score</Title>
             <ResponsiveContainer width="100%" height="85%">
               <RadialBarChart
@@ -122,14 +127,14 @@ export default class Goal extends Component {
                 </text>
               </RadialBarChart>
             </ResponsiveContainer>
-          </>
+          </Stat>
         }
         { this.state.error &&
           <>
             <p>Chargement impossible</p>
           </>
         }
-      </Stat>
+      </>
     )
   }
 }

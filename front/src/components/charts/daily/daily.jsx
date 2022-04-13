@@ -2,6 +2,8 @@ import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
+  Loading,
+  Loader,
   Stat,
   Header,
   Title,
@@ -103,14 +105,14 @@ export default class Daily extends Component {
 
   render() {
     return(
-      <Stat>
+      <>
         { this.state.loading &&
-          <>
-            <p>Chargement en cours</p>
-          </>
+          <Loading>
+            <Loader />
+          </Loading>
         }
         { this.state.data &&
-          <>
+          <Stat>
             <Header>
               <Title>Activité quotidienne</Title>
               <Legend>
@@ -167,14 +169,14 @@ export default class Daily extends Component {
                 />
               </BarChart>
             </ResponsiveContainer>
-          </>
+          </Stat>
         }
         { this.state.error &&
           <>
             <p>Chargement impossible</p>
           </>
         }
-      </Stat>
+      </>
     )
   }
 }

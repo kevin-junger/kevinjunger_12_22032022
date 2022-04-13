@@ -2,6 +2,8 @@ import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
+  Loading,
+  Loader,
   Stat,
   Title,
   TooltipBox,
@@ -93,14 +95,14 @@ export default class Sessions extends Component {
 
   render() {
     return(
-      <Stat>
+      <>
         { this.state.loading &&
-          <>
-            <p>Chargement en cours</p>
-          </>
+          <Loading>
+            <Loader />
+          </Loading>
         }
         { this.state.data &&
-          <>
+          <Stat>
             <Title>Durée moyenne des sessions</Title>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
@@ -135,14 +137,14 @@ export default class Sessions extends Component {
                 />
               </LineChart>
             </ResponsiveContainer>
-          </>
+          </Stat>
         }
         { this.state.error &&
           <>
             <p>Chargement impossible</p>
           </>
         }
-      </Stat>
+      </>
     )
   }
 }
