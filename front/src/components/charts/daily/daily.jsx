@@ -1,29 +1,8 @@
 import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import {
-  Container,
-  Loader,
-  Error,
-  Stat,
-  Header,
-  Title,
-  Legend,
-  LegendColor,
-  LegendTitle,
-  TooltipBox,
-  TooltipList,
-  TooltipItem
-} from "./dailyUI"
-import {
-  ResponsiveContainer,
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Bar,
-  Tooltip,
-} from "recharts"
+import { Container, Loader, Error, Stat, Header, Title, Legend, LegendColor, LegendTitle, TooltipBox, TooltipList, TooltipItem } from "./dailyUI"
+import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Bar, Tooltip } from "recharts"
 
 /**
  * Creates and returns the tooltip box when hovering any of the chart's entries, or null if not
@@ -58,7 +37,7 @@ export default function Daily(props) {
   const api = props.api
 
   /**
-   * Fetches and stores the user's daily activity over the last 7 days
+   * Fetches and stores the user's daily activity over the last 7 days into an array
    */
   useEffect(() => {
     api.getUserActivity()
@@ -118,42 +97,13 @@ export default function Daily(props) {
             </Legend>
           </Header>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={data}
-              margin={{ top: 80, right: 24, bottom: 32, left: 24 }}
-              barGap={8}
-              barCategoryGap="40%"
-            >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                vertical={false}
-              />
-              <XAxis 
-                dataKey="day"
-                dy={16}
-                tickLine={false}
-                tick={{ fontSize: 14, fontWeight: 500 }}
-              />
-              <YAxis
-                dataKey="calories"
-                hide={true}
-              />
-              <Bar
-                dataKey="kilogram"
-                fill="#000000"
-                radius={[50, 50, 0, 0]}
-              />
-              <Bar
-                dataKey="calories"
-                fill="#ff0000"
-                radius={[50, 50, 0, 0]}
-              />
-              <Tooltip
-                cursor={{
-                  fill: "rgba(0, 0, 0, 0.1)",
-                }}
-                content={<CustomTooltip />}
-              />
+            <BarChart data={data} margin={{ top: 80, right: 24, bottom: 32, left: 24 }} barGap={8} barCategoryGap="40%">
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="day" dy={16} tickLine={false} tick={{ fontSize: 14, fontWeight: 500 }} />
+              <YAxis dataKey="calories" hide={true} />
+              <Bar dataKey="kilogram" fill="#000000" radius={[50, 50, 0, 0]} />
+              <Bar dataKey="calories" fill="#ff0000" radius={[50, 50, 0, 0]} />
+              <Tooltip cursor={{ fill: "rgba(0, 0, 0, 0.1)" }} content={<CustomTooltip />} />
             </BarChart>
           </ResponsiveContainer>
         </Stat>
