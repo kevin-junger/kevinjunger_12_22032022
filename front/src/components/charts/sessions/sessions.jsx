@@ -2,8 +2,9 @@ import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
-  Loading,
+  Container,
   Loader,
+  Error,
   Stat,
   Title,
   TooltipBox,
@@ -97,9 +98,9 @@ export default class Sessions extends Component {
     return(
       <>
         { this.state.loading &&
-          <Loading>
+          <Container>
             <Loader />
-          </Loading>
+          </Container>
         }
         { this.state.data &&
           <Stat>
@@ -140,9 +141,9 @@ export default class Sessions extends Component {
           </Stat>
         }
         { this.state.error &&
-          <>
-            <p>Chargement impossible</p>
-          </>
+          <Container>
+            <Error>!</Error>
+          </Container>
         }
       </>
     )

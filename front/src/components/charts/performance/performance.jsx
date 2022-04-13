@@ -2,8 +2,9 @@ import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
-  Loading,
+  Container,
   Loader,
+  Error,
   Stat,
 } from "./performanceUI"
 import {
@@ -81,9 +82,9 @@ export default class Performance extends Component {
     return(
       <>
         { this.state.loading &&
-          <Loading>
+          <Container>
             <Loader />
-          </Loading>
+          </Container>
         }
         { this.state.data &&
           <Stat>
@@ -114,9 +115,9 @@ export default class Performance extends Component {
           </Stat>
         }
         { this.state.error &&
-          <>
-            <p>Chargement impossible</p>
-          </>
+          <Container>
+            <Error>!</Error>
+          </Container>
         }
       </>
     )

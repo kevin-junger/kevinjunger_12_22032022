@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import { keyframes } from "styled-components"
 
-export const Loading = styled.div`
+export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #fbfbfb;
@@ -33,6 +34,19 @@ export const Loader = styled.div`
     border-color: #000 transparent #000 transparent;
     animation: ${rotateLoader} 1.2s linear infinite;
   }
+`
+
+export const Error = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: black;
+  color: #fbfbfb;
+  display: flex;
+  font-size: 40px;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Card = styled.div`

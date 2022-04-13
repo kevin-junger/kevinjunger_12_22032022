@@ -2,8 +2,9 @@ import { Component } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
 import {
-  Loading,
+  Container,
   Loader,
+  Error,
   Card,
   Info,
   Title,
@@ -83,18 +84,18 @@ export default class Nutrition extends Component {
       <>
         { this.state.loading && 
           <>
-            <Loading>
+            <Container>
               <Loader />
-            </Loading>
-            <Loading>
+            </Container>
+            <Container>
               <Loader />
-            </Loading>
-            <Loading>
+            </Container>
+            <Container>
               <Loader />
-            </Loading>
-            <Loading>
+            </Container>
+            <Container>
               <Loader />
-            </Loading>
+            </Container>
           </>
         }
         { this.state.data && this.state.data.map(datum =>
@@ -111,7 +112,18 @@ export default class Nutrition extends Component {
         }
         { this.state.error &&
           <>
-            <p>Chargement impossible</p>
+            <Container>
+              <Error>!</Error>
+            </Container>
+            <Container>
+              <Error>!</Error>
+            </Container>
+            <Container>
+              <Error>!</Error>
+            </Container>
+            <Container>
+              <Error>!</Error>
+            </Container>
           </>
         }
       </>
