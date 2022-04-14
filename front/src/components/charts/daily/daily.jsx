@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload }) => {
 /**
  * Displays the analytics for the user's daily activity via a bar chart
  * @param { GetUserApi } api - Mandatory
- * @returns { StyledComponent }
+ * @returns { Component }
  */
 export default function Daily(props) {
   const [loading, setLoading] = useState(true)

@@ -7,7 +7,7 @@ import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from "
 /**
  * Displays the user's daily goal achievement via a radial bar chart
  * @param { GetUserApi } api - Mandatory
- * @returns { StyledComponent | null }
+ * @returns { Component | null }
  */
 export default function Goal(props) {
   
