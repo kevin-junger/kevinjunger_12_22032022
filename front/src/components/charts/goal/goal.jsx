@@ -1,44 +1,27 @@
-import { Component } from "react"
+import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import {
-  Container,
-  Loader,
-  Error,
-  Stat,
-  Title,
-} from "./goalUI"
-import {
-  RadialBarChart,
-  RadialBar,
-  ResponsiveContainer,
-  PolarAngleAxis
-} from "recharts"
+import { Container, Loader, Error, Stat, Title } from "./goalUI"
+import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from "recharts"
 
 /**
- * @class Goal
- * @classdesc Displays the user's daily goal achievement via a radial bar chart
+ * Displays the user's daily goal achievement via a radial bar chart
  * @param { GetUserApi } api - Mandatory
+ * @returns { StyledComponent | null }
  */
-export default class Goal extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true,
-      data: null,
-      error: false,
-    }
-  }
+export default function Goal(props) {
+  
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(false)
 
-  static propTypes = {
-    api: PropTypes.instanceOf(GetUserApi).isRequired,
-  }
-
+  const api = props.api
+  
   /**
    * Fetches and stores the user's current percentage of achievement
    */
-  componentDidMount() {
-    this.props.api.getUser()
+  useEffect(() => {
+    api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
@@ -46,96 +29,54 @@ export default class Goal extends Component {
       return response.data.data
     })
     .then(data => {
-      this.setState({
-        loading: false,
-        data: [
-          { value: data.todayScore * 100 }
-        ],
-        error: false,
-      })
+      setLoading(false)
+      setData([
+        { value: data.todayScore * 100 }
+      ])
     })
     .catch(error => {
       console.log(error)
-      this.setState({
-        loading: false,
-        data: null,
-        error: true,
-      })
+      setLoading(false)
+      setError(true)
     })
-  }
+  }, [api])
 
-  render() {
-    return(
-      <>
-        { this.state.loading &&
-          <Container>
-            <Loader />
-          </Container>
-        }
-        { this.state.data &&
-          <Stat>
-            <Title>Score</Title>
-            <ResponsiveContainer width="100%" height="85%">
-              <RadialBarChart
-                innerRadius={"90%"}
-                barSize={10}
-                data={this.state.data}
-                startAngle={225}
-                endAngle={-45}
-              >
-                <PolarAngleAxis
-                  type="number"
-                  domain={[0, 100]}
-                  angleAxisId={0}
-                  tick={false}
-                />
-                <RadialBar
-                  background
-                  clockWise
-                  dataKey="value"
-                  fill="#ff0000"
-                  cornerRadius={50}
-                />
-                <text
-                  x={"50%"}
-                  y={"45%"}
-                  fontSize={26}
-                  fontWeight={"700"}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                >
-                  {this.state.data[0].value} %
-                </text>
-                <text
-                  x={"50%"}
-                  y={"55%"}
-                  fontSize={16}
-                  fontWeight={"500"}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                >
-                  de votre
-                </text>
-                <text
-                  x={"50%"}
-                  y={"63%"}
-                  fontSize={16}
-                  fontWeight={"500"}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                >
-                  objectif
-                </text>
-              </RadialBarChart>
-            </ResponsiveContainer>
-          </Stat>
-        }
-        { this.state.error &&
-          <Container>
-            <Error>!</Error>
-          </Container>
-        }
-      </>
-    )
-  }
+  return(
+    <>
+      { loading &&
+        <Container>
+          <Loader />
+        </Container>
+      }
+      { data &&
+        <Stat>
+          <Title>Score</Title>
+          <ResponsiveContainer width="100%" height="85%">
+            <RadialBarChart innerRadius={"90%"} barSize={10} data={data} startAngle={225} endAngle={-45}>
+              <PolarAngleAxis type="number" domain={[0, 100]} angleAxisId={0} tick={false} />
+              <RadialBar background clockWise dataKey="value" fill="#ff0000" cornerRadius={50} />
+              <text x={"50%"} y={"45%"} fontSize={26} fontWeight={"700"} textAnchor="middle" dominantBaseline="middle">
+                {data[0].value} %
+              </text>
+              <text x={"50%"} y={"55%"} fontSize={16} fontWeight={"500"} textAnchor="middle" dominantBaseline="middle">
+                de votre
+              </text>
+              <text x={"50%"} y={"63%"} fontSize={16} fontWeight={"500"} textAnchor="middle" dominantBaseline="middle">
+                objectif
+              </text>
+            </RadialBarChart>
+          </ResponsiveContainer>
+        </Stat>
+      }
+      { error &&
+        <Container>
+          <Error>!</Error>
+        </Container>
+      }
+    </>
+  )
+}
+
+Goal.propTypes = {
+  api: PropTypes.instanceOf(GetUserApi).isRequired,
 }
