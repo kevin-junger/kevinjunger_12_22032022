@@ -1,22 +1,8 @@
-import { Component } from "react"
+import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import {
-  Container,
-  Loader,
-  Error,
-  Stat,
-  Title,
-  TooltipBox,
-  TooltipInfo
-} from "./sessionsUI"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  Tooltip,
-  ResponsiveContainer
-} from "recharts"
+import { Container, Loader, Error, Stat, Title, TooltipBox, TooltipInfo } from "./sessionsUI"
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts"
 
 /**
  * Creates and returns the tooltip box when hovering any of the chart's entries, or null if not
@@ -36,29 +22,22 @@ const CustomTooltip = ({ active, payload }) => {
 }
 
 /**
- * @class Sessions
- * @classdesc Displays the user's average session duration per day on a weekly basis
+ * Displays the user's average session duration per day on a weekly basis
  * @param { GetUserApi } api - Mandatory
+ * @returns { Component }
  */
-export default class Sessions extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true,
-      data: null,
-      error: false,
-    }
-  }
+export default function Sessions(props) {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(false)
 
-  static propTypes = {
-    api: PropTypes.instanceOf(GetUserApi).isRequired,
-  }
+  const api = props.api
 
   /**
    * Fetches and stores the average daily duration
    */
-  componentDidMount() {
-    this.props.api.getUserAverageSessions()
+  useEffect(() => {
+    api.getUserAverageSessions()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
@@ -78,74 +57,44 @@ export default class Sessions extends Component {
         })
       })
       
-      this.setState({
-        loading: false,
-        data: sessions,
-        error: false,
-      })
+      setLoading(false)
+      setData(sessions)
     })
     .catch(error => {
       console.log(error)
-      this.setState({
-        loading: false,
-        data: null,
-        error: true,
-      })
+      setLoading(false)
+      setError(true)
     })
-  }
+  }, [api])
 
-  render() {
-    return(
-      <>
-        { this.state.loading &&
-          <Container>
-            <Loader />
-          </Container>
-        }
-        { this.state.data &&
-          <Stat>
-            <Title>Durée moyenne des sessions</Title>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={this.state.data}
-                margin={{ top: 68, right: 24, bottom: 24, left: 24 }}
-              >
-                <XAxis
-                  dataKey="day"
-                  stroke="rgba(255, 255, 255, 0.6)"
-                  axisLine={false}
-                  dy={10}
-                  tickLine={false}
-                  tick={{
-                    fontSize: 12,
-                    fontWeight: 500,
-                  }}
-                />
-                <Tooltip
-                  content={<CustomTooltip />}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="sessionLength"
-                  stroke="rgba(255, 255, 255, 0.6)"
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={{
-                    stroke: "rgba(255,255,255, 0.6)",
-                    strokeWidth: 10,
-                    r: 5,
-                  }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </Stat>
-        }
-        { this.state.error &&
-          <Container>
-            <Error>!</Error>
-          </Container>
-        }
-      </>
-    )
-  }
+  return(
+    <>
+      { loading &&
+        <Container>
+          <Loader />
+        </Container>
+      }
+      { data &&
+        <Stat>
+          <Title>Durée moyenne des sessions</Title>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data} margin={{ top: 68, right: 24, bottom: 24, left: 24 }}>
+              <XAxis dataKey="day" stroke="rgba(255, 255, 255, 0.6)" axisLine={false} dy={10} tickLine={false} tick={{ fontSize: 12, fontWeight: 500 }} />
+              <Tooltip content={<CustomTooltip />} />
+              <Line type="monotone" dataKey="sessionLength" stroke="rgba(255, 255, 255, 0.6)" strokeWidth={2} dot={false} activeDot={{ stroke: "rgba(255,255,255, 0.6)", strokeWidth: 10, r: 5 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Stat>
+      }
+      { error &&
+        <Container>
+          <Error>!</Error>
+        </Container>
+      }
+    </>
+  )
+}
+
+Sessions.propTypes = {
+  api: PropTypes.instanceOf(GetUserApi).isRequired,
 }
