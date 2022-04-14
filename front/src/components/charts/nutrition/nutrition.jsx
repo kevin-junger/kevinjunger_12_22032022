@@ -1,33 +1,29 @@
-import { Component } from "react"
+import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import {
-  Card,
-  Info,
-  Title,
-  Datum,
-  Icon
-} from "./nutritionUI"
+import { Container, Loader, Error, Card, Info, Title, Datum, Icon } from "./nutritionUI"
 import CaloriesIcon from "./icons/calories"
 import LipidsIcon from "./icons/lipids"
 import CarbohydratesIcon from "./icons/carbohydrates"
 import ProteinsIcon from "./icons/proteins"
 
-export default class Nutrition extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: null,
-      error: false,
-    }
-  }
+/**
+ * Displays the user's daily nutrition information (calories, etc.) via cards on the right
+ * @param { GetUserApi } api - Mandatory
+ * @returns { Component | null }
+ */
+export default function Nutrition(props) {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(false)
 
-  static propTypes = {
-    api: PropTypes.instanceOf(GetUserApi).isRequired,
-  }
+  const api = props.api
 
-  componentDidMount() {
-    this.props.api.getUser()
+  /**
+   * Fetches and stores the user's nutritional information
+   */
+  useEffect(() => {
+    api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
@@ -35,7 +31,7 @@ export default class Nutrition extends Component {
       return response.data.data
     })
     .then(data => {
-      const keyData = []
+      let keyData = []
       const categories = ['Calories', 'Protéines', 'Glucides', 'Lipides']
       const catIcons = [CaloriesIcon, ProteinsIcon, CarbohydratesIcon, LipidsIcon]
 
@@ -51,36 +47,66 @@ export default class Nutrition extends Component {
         i += 1
       }
 
-      this.setState({
-        data: keyData,
-        error: false,
-      })
+      setLoading(false)
+      setData(keyData)
     })
     .catch(error => {
       console.log(error)
-      this.setState({
-        data: null,
-        error: true,
-      })
+      setLoading(false)
+      setError(true)
     })
-  }
+  }, [api])
 
-  render() {
-    return(
-      <>
-        { this.state.data && this.state.data.map(datum =>
-          <Card key={datum.category}>
-            <Icon category={datum.category}>
-              {datum.icon()}
-            </Icon>
-            <Info>
-              <Datum>{datum.value} {datum.category === 'calorieCount' ? 'kcal' : 'g'}</Datum>
-              <Title>{datum.title}</Title>
-            </Info>
-          </Card>
-        )
-        }
-      </>
-    )
-  }
+  return(
+    <>
+      { loading && 
+        <>
+          <Container>
+            <Loader />
+          </Container>
+          <Container>
+            <Loader />
+          </Container>
+          <Container>
+            <Loader />
+          </Container>
+          <Container>
+            <Loader />
+          </Container>
+        </>
+      }
+      { data && data.map(datum =>
+        <Card key={datum.category}>
+          <Icon category={datum.category}>
+            {datum.icon()}
+          </Icon>
+          <Info>
+            <Datum>{datum.value} {datum.category === 'calorieCount' ? 'kcal' : 'g'}</Datum>
+            <Title>{datum.title}</Title>
+          </Info>
+        </Card>
+      )
+      }
+      { error &&
+        <>
+          <Container>
+            <Error>!</Error>
+          </Container>
+          <Container>
+            <Error>!</Error>
+          </Container>
+          <Container>
+            <Error>!</Error>
+          </Container>
+          <Container>
+            <Error>!</Error>
+          </Container>
+        </>
+      }
+    </>
+  )
+}
+
+Nutrition.propTypes = {
+  api: PropTypes.instanceOf(GetUserApi).isRequired,
 }

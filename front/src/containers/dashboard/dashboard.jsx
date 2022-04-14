@@ -8,6 +8,10 @@ import Performance from "../../components/charts/performance/performance"
 import Sessions from "../../components/charts/sessions/sessions"
 import Nutrition from "../../components/charts/nutrition/nutrition"
 
+/**
+ * Displays the user's dashboard
+ * @returns { StyledComponent }
+ */
 export default function DashboardUI() {
   let params = useParams()
   const api = new GetUserApi(params.userId)

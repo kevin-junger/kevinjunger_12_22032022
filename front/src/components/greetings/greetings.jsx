@@ -1,23 +1,25 @@
-import { Component } from "react"
+import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../containers/dashboard/getUserApi"
-import { Howdy, Hello, Name, Congrats } from "./greetingsUI"
+import { Container, Heading, Name, Subheading } from "./greetingsUI"
 
-export default class Greetings extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: null,
-      error: false,
-    }
-  }
+/**
+ * Displays a greetings message on the user's dashboard
+ * @param { GetUserApi } api - Mandatory
+ * @returns { StyledComponent }
+ */
+export default function Greetings(props) {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(false)
 
-  static propTypes = {
-    api: PropTypes.instanceOf(GetUserApi).isRequired,
-  }
+  const api = props.api
 
-  componentDidMount() {
-    this.props.api.getUser()
+  /**
+   * Fetches the user's name and updates the component's state
+   */
+  useEffect(() => {
+    api.getUser()
     .then(response => {
       if(response.statusText !== "OK") {
         throw new Error(response.statusText)
@@ -25,36 +27,40 @@ export default class Greetings extends Component {
       return response.data.data
     })
     .then(data => {
-      this.setState({
-        data: data.userInfos.firstName,
-        error: false,
-      })
+      setLoading(false)
+      setData(data.userInfos.firstName)
     })
     .catch(error => {
       console.log(error)
-      this.setState({
-        data: null,
-        error: true,
-      })
+      setLoading(false)
+      setError(true)
     })
-  }
+  }, [api])
 
-  render() {
-    return(
-      <Howdy>
-        { this.state.data &&
-          <>
-            <Hello>Bonjour <Name>{this.state.data}</Name></Hello>
-            <Congrats>Félicitation ! Vous avez explosé vos objectifs hier 👏</Congrats>
-          </>
-        }
-        { this.state.error &&
-          <>
-            <Hello>Erreur</Hello>
-            <Congrats>Veuillez réessayer</Congrats>
-          </>
-        }
-      </Howdy>
-    )
-  }
+  return(
+    <Container>
+      { loading &&
+        <>
+          <Heading>Chargement</Heading>
+          <Subheading>Veuillez patienter</Subheading>
+        </>
+      }
+      { data &&
+        <>
+          <Heading>Bonjour <Name>{data}</Name></Heading>
+          <Subheading>Félicitation ! Vous avez explosé vos objectifs hier 👏</Subheading>
+        </>
+      }
+      { error &&
+        <>
+          <Heading>Erreur</Heading>
+          <Subheading>Veuillez réessayer</Subheading>
+        </>
+      }
+    </Container>
+  )
+}
+
+Greetings.propTypes = {
+  api: PropTypes.instanceOf(GetUserApi).isRequired,
 }
