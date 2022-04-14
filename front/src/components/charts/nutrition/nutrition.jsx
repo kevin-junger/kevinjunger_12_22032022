@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import GetUserApi from "../../../containers/dashboard/getUserApi"
-import {
-  Container,
-  Loader,
-  Error,
-  Card,
-  Info,
-  Title,
-  Datum,
-  Icon,
-} from "./nutritionUI"
+import { Container, Loader, Error, Card, Info, Title, Datum, Icon } from "./nutritionUI"
 import CaloriesIcon from "./icons/calories"
 import LipidsIcon from "./icons/lipids"
 import CarbohydratesIcon from "./icons/carbohydrates"
