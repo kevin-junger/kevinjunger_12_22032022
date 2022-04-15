@@ -28,8 +28,9 @@ export default class GetUserApi {
    * @param { string } path - Can be left empty (which means the URI will be `/user/${userId}`), or it'll be add to the end of the default URI (e.g. `/user/${userId}/activity` if `path = "activity"`)
    * @returns { object }
    */
-  init(path = '') {
-    return this.instance.get(`${this.userId}${path}`)
+  async init(path = '') {
+    const response = await this.instance.get(`${this.userId}${path}`)
+    return response
   }
 
   /**
