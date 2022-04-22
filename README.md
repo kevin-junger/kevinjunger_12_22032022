@@ -4,19 +4,20 @@ Ce dépôt contient tout le code nécessaire au fonctionnement du tableau de bor
 
 ## 2. Pré-requis
 
-- [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/) v.16.14.2 (LTS)
 - [Yarn](https://yarnpkg.com/)
 
 Si vous avez l'habitude ou la nécessité de travailler avec plusieurs versions de NodeJS, il est recommandé d'utiliser [nvm](https://github.com/nvm-sh/nvm) pour vous permettre de gérer plus facilement vos différentes versions.
 
-## 3. API
+## 3. Back-end (API)
 
 ### 3.1 *Start me up!*
 
-**Chacune de ces commandes DOIVENT être exécutées depuis la racine du projet.**
-
-- La commande `yarn` vous permettra d'installer les dépendances nécessaires ;
+- Positionnez-vous dans le dossier `back` ;
+- Exécutez la commande `yarn` pour installer les dépendances ;
 - `yarn dev` vous permettra d'exécuter la micro API.
+
+> Si la commande `yarn` est introuvable, exécutez la commande `corepack enable` et démarrez une nouvelle instance de votre terminal. Plus de détails dans la [documentation de Yarn](https://yarnpkg.com/getting-started/install).
 
 ### 3.2 Points d'accès
 
@@ -37,7 +38,7 @@ Le projet propose ces quatre points d'accès qui devront être utilisés pour r�
 - Exécutez la commande `npm i -D` pour installer les dépendances ;
 - Enfin, exécutez `npm start` pour démarrer le front-end.
 
-**Si vous avez bien démarré l'API, elle devrait déjà tourner sur le port 3000, ce qui occasionnera une erreur lorsque vous tenterez d'exécuter le front-end. Vous aurez donc le choix d'opter pour le port 3001 à la place, veuillez donc confirmer.**
+**Si vous avez bien démarré la micro API, elle devrait déjà tourner sur le port 3000, ce qui occasionnera une erreur lorsque vous tenterez d'exécuter le front-end. Vous aurez donc le choix d'opter pour le port 3001 à la place, veuillez donc confirmer.**
 
 > Pour plus de détails concernant les scripts proposés par défaut par Create React App, veuillez consulter le `README.md` dans le dossier `front`.
 
@@ -56,19 +57,20 @@ This repository contains all the source code needed to run the SportSee dashboar
 
 ## 2. Prerequisites
 
-- [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/) v.16.14.2 (LTS)
 - [Yarn](https://yarnpkg.com/)
 
 If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
 
-## 3. API
+## 3. Back-end (API)
 
 ### 3.1 *Start me up!*
 
-**Each of these commands MUST be done from the main project folder.**
-
+- Locate yourself into the `back` folder first;
 - The `yarn` command will allow you to install the dependencies;
 - The `yarn dev` command will allow you to run the micro API.
+
+> If you get an error while trying to run the `yarn` command, please execute `corepack enable`, reload your terminal and try again. More info in the [Yarn documentation](https://yarnpkg.com/getting-started/install).
 
 ### 3.2. Endpoints
 
